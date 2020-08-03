@@ -1,5 +1,4 @@
-import React from 'react';
-import Button from './Button.js'
+import React, { useState } from 'react';
 import './App.css';
 
 let buttonTextItems = ["Bears, beets, Battlestar Galactica"
@@ -7,54 +6,45 @@ let buttonTextItems = ["Bears, beets, Battlestar Galactica"
   , "Where do programmers like to hangout? The Foo Bar"
 ];
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userText: "",
-    };
-    this.input = React.createRef();
-  }
+const initialGameState = {
+  victory: false
+  , startTime: null
+  , totalTime: null
+}
 
-  updateUserText = (event) => {
-    this.setState( {userText : event.target.value } );
+const App = () => {
 
-    if (event.target.value === this.state.snippet) { 
-      this.setState({victory: true, endTime: new Date().getTime() - this.state.startTime});
-    }
-    else {
-      this.setState({victory: false, endTime: null});
-    }
-  };
+  const [userText, setUserText] = useState("");
+  const [snippet, setSnippet] = useState("");
+  const [gameState, setGameState] = useState(initialGameState);
 
-  submitNewSnippet = (event) => {
-    if (event.key === "Enter") { 
-      buttonTextItems.push(this.state.userText);
-      this.setState({ state: this.state });
+  const updateUserText = (event) => {
+    setUserText(event.target.value);
+
+    if (event.target.value === snippet && snippet !== "") {
+      setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime})
     }
   };
 
-  chooseSnippet = (index, event) => {
-    this.setState({snippet : this.state.snippet === buttonTextItems[index] ? null : buttonTextItems[index]
-      , startTime: new Date().getTime()
-      , userText: ""
-      , victory: false});
-    this.input.current.focus();
+  const chooseSnippet = (index) => {
+    setSnippet(buttonTextItems[index]);
+    setGameState( {...gameState, startTime: new Date().getTime()} );
   };
 
-  render() {
-    return (
+  return (
+    <div>
+      <h2>Type Race</h2>
+      <hr/>
+      <h3>Snippet</h3>
       <div>
-        <h2>Type Race</h2>
-        {this.state.snippet}
-        <h4>{this.state.victory ? `Jam Jamboree! Time: ${this.state.endTime}ms` : null}</h4>
-        <hr/>
-        <input value={this.state.userText} onChange={this.updateUserText} onKeyDown={this.submitNewSnippet} ref={this.input}/>
-        <hr/>
-        { buttonTextItems.map((textItem, index) => <Button onClick={(e) => this.chooseSnippet(index, e)} buttonText={textItem} />) }
+        {snippet}
       </div>
-    );
-  }
+      <h4>{gameState.victory ? `Jam Jamboree! Time: ${gameState.totalTime}ms` : null}</h4>
+      <input value={userText} onChange={updateUserText}/>
+      <hr/>
+      {buttonTextItems.map((elem, index) => <button onClick={() => chooseSnippet(index)}>{elem}</button>)}
+    </div>
+  );
 
 }
 
