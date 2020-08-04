@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-let buttonTextItems = ["Bears, beets, Battlestar Galactica"
-  ,"What's Forrest Gump's password? 1Forrest1"
-  , "Where do programmers like to hangout? The Foo Bar"
-];
 
 const initialGameState = {
   victory: false
@@ -17,6 +13,8 @@ const App = () => {
   const [userText, setUserText] = useState("");
   const [snippet, setSnippet] = useState("");
   const [gameState, setGameState] = useState(initialGameState);
+  const [hasError, setErrors] = useState(false);
+  const [filmNames, setFilmNames] = useState([]);
 
   const updateUserText = (event) => {
     setUserText(event.target.value);
@@ -26,10 +24,29 @@ const App = () => {
     }
   };
 
-  const chooseSnippet = (index) => {
-    setSnippet(buttonTextItems[index]);
+  const chooseSnippet = (title) => {
+    setSnippet(title);
     setGameState( {...gameState, startTime: new Date().getTime()} );
   };
+
+  const fetchData = async () => {
+    const response = await fetch('https://ghibliapi.herokuapp.com/films?limit=3');
+    response
+      .json()
+      .then(response => setFilmNames(response))
+      .catch(err => setErrors(err))
+  }
+
+  useEffect(() => {
+    if (gameState.victory === true) {
+      document.title = 'Victory!';
+    }
+  });
+
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -42,7 +59,7 @@ const App = () => {
       <h4>{gameState.victory ? `Jam Jamboree! Time: ${gameState.totalTime}ms` : null}</h4>
       <input value={userText} onChange={updateUserText}/>
       <hr/>
-      {buttonTextItems.map((elem, index) => <button onClick={() => chooseSnippet(index)}>{elem}</button>)}
+      {filmNames.map((film) => <button onClick={() => chooseSnippet(film.title)}>{film.title}</button>)}
     </div>
   );
 
