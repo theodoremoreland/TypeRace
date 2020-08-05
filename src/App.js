@@ -30,10 +30,23 @@ const App = () => {
   };
 
   const fetchData = async () => {
-    const response = await fetch('https://ghibliapi.herokuapp.com/films?limit=3');
+    const response = await fetch('https://ghibliapi.herokuapp.com/films');
+    let randomizedResponse = [];
     response
       .json()
-      .then(response => setFilmNames(response))
+      .then((response) => {
+        for (let i = 0; i < 5; i++) {
+          let random = Math.floor(Math.random() * response.length);
+          let film = response[random];
+          if (!randomizedResponse.includes(film)) {
+            randomizedResponse.push(film)
+          }
+          else {
+            i--;
+          }
+        }
+        setFilmNames(randomizedResponse);
+      })
       .catch(err => setErrors(err))
   }
 
