@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-
 const initialGameState = {
   victory: false
   , startTime: null
@@ -18,7 +17,12 @@ const App = () => {
   // Content Variables
   const [filmNames, setFilmNames] = useState([]);
   const [quotes, setQuotes] = useState([]);
-  const [idioms, setIdioms] = useState([]);
+  const [kanyeQuotes, setKanyeQuotes] = useState([]);
+  const genres = {
+    "filmNames": filmNames
+    , "quotes": quotes
+    , "kanyeQuotes": kanyeQuotes
+  }
 
   // Error variables
   const [hasError, setErrors] = useState(false);
@@ -30,6 +34,13 @@ const App = () => {
     if (event.target.value === snippet && snippet !== "") {
       setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime})
     }
+  };
+
+
+  const chooseGenre = (genre) => {
+    let buttons = genres[genre].map((film) => <button onClick={() => chooseSnippet(film)}>{film}</button>);
+    console.log(buttons);
+    return buttons
   };
 
 
@@ -48,7 +59,7 @@ const App = () => {
       .then((response) => {
         for (let i = 0; i < 5; i++) {
           let random = Math.floor(Math.random() * response.length);
-          let film = response[random];
+          let film = response[random].title;
           if (!randomizedfilms.includes(film)) {
             randomizedfilms.push(film)
           }
@@ -76,26 +87,29 @@ const App = () => {
             }
         })
         .catch(err => setErrors(err))
-      } while (randomizedQoutes.length < 5);
+      } while (randomizedQoutes.length < 3);
 
       setQuotes(randomizedQoutes);
   }
 
 
-  const fetchIdioms = async () => {
-    const response = await fetch('https://randomword.com/idiom');
-    let randomizedIdioms = [];
+  const fetchKanyeQuotes = async () => {
+    let randomKanyeQuotes = [];
     
-    response
-      .json()
-      .then((response) => {
-        for (let i = 0; i < 5; i++) {
-          let idiom = response.content
-          console.log(`Response (idiom): ${response}\n${idiom}`);
-        }
-        setIdioms(randomizedIdioms);
-      })
-      .catch(err => setErrors(err))
+    do {
+      let response = await fetch('https://api.kanye.rest');
+      response
+        .json()
+        .then((response) => {
+            let kanyeQuote = response.quote;
+            if (!randomKanyeQuotes.includes(kanyeQuote)) {
+            randomKanyeQuotes.push(kanyeQuote);
+            }
+        })
+        .catch(err => setErrors(err))
+    } while (randomKanyeQuotes.length < 2);
+
+    setKanyeQuotes(randomKanyeQuotes);
   }
 
 
@@ -109,8 +123,9 @@ const App = () => {
   useEffect(() => {
     fetchFilmNames();
     fetchQuotes();
-    fetchIdioms();
+    fetchKanyeQuotes();
   }, []);
+
 
   return (
     <div>
@@ -123,7 +138,7 @@ const App = () => {
       <h4>{gameState.victory ? `Jam Jamboree! Time: ${gameState.totalTime}ms` : null}</h4>
       <input value={userText} onChange={updateUserText}/>
       <hr/>
-      {filmNames.map((film) => <button onClick={() => chooseSnippet(film.title)}>{film.title}</button>)}
+      {Object.keys(genres).map((genre) => <button onClick={() => chooseGenre(genre)}>{genre}</button>)}
     </div>
   );
 
