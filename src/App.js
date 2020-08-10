@@ -39,7 +39,6 @@ const App = () => {
 
   const chooseGenre = (genre) => {
     let buttons = genres[genre].map((film) => <button onClick={() => chooseSnippet(film)}>{film}</button>);
-    console.log(buttons);
     return buttons
   };
 
@@ -51,25 +50,22 @@ const App = () => {
 
 
   const fetchFilmNames = async () => {
-    const response = await fetch('https://ghibliapi.herokuapp.com/films');
+    const response = await fetch('https://ghibliapi.herokuapp.com/films');    
+    const json = await response.json();
     let randomizedfilms = [];
-    
-    response
-      .json()
-      .then((response) => {
-        for (let i = 0; i < 5; i++) {
-          let random = Math.floor(Math.random() * response.length);
-          let film = response[random].title;
-          if (!randomizedfilms.includes(film)) {
-            randomizedfilms.push(film)
-          }
-          else {
-            i--;
-          }
-        }
-        setFilmNames(randomizedfilms);
-      })
-      .catch(err => setErrors(err))
+
+    for (let i = 0; i < 5; i++) {
+      let random = Math.floor(Math.random() * json.length);
+      let film = json[random].title;
+      if (!randomizedfilms.includes(film)) {
+        randomizedfilms.push(film)
+      }
+      else {
+        i--;
+      }
+    }
+
+    setFilmNames(randomizedfilms);
   }
 
 
@@ -78,18 +74,16 @@ const App = () => {
     
     do {
       let response = await fetch('https://api.quotable.io/random');
-      response
-        .json()
-        .then((response) => {
-            let quote = response.content;
-            if (!randomizedQoutes.includes(quote)) {
-              randomizedQoutes.push(quote)
-            }
-        })
-        .catch(err => setErrors(err))
-      } while (randomizedQoutes.length < 3);
+      let json = await response.json();
+      let quote = json.content;
 
-      setQuotes(randomizedQoutes);
+      if (!randomizedQoutes.includes(quote)) {
+        randomizedQoutes.push(quote)
+      }
+
+    } while (randomizedQoutes.length < 3);
+
+    setQuotes(randomizedQoutes);
   }
 
 
@@ -98,15 +92,13 @@ const App = () => {
     
     do {
       let response = await fetch('https://api.kanye.rest');
-      response
-        .json()
-        .then((response) => {
-            let kanyeQuote = response.quote;
-            if (!randomKanyeQuotes.includes(kanyeQuote)) {
-            randomKanyeQuotes.push(kanyeQuote);
-            }
-        })
-        .catch(err => setErrors(err))
+      let json = await response.json();
+      let kanyeQuote = json.quote;
+
+      if (!randomKanyeQuotes.includes(kanyeQuote)) {
+      randomKanyeQuotes.push(kanyeQuote);
+      }
+
     } while (randomKanyeQuotes.length < 2);
 
     setKanyeQuotes(randomKanyeQuotes);
