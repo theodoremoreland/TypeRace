@@ -36,6 +36,12 @@ const App = () => {
     if (text === snippet && snippet !== "") {
       setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime})
     }
+    else if (gameState.victory === true && text !== snippet) {
+      setGameState({...gameState, victory: false})
+    }
+    else if (text === "") {
+      setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
+    }
   };
 
   const chooseSnippet = (userSelectedSnippet) => {
@@ -65,7 +71,10 @@ const App = () => {
     if (gameState.victory === true) {
       document.title = 'Victory!';
     }
-  });
+    else {
+      document.title = 'Type Race';
+    };
+  }, [gameState.victory]);
 
   useEffect(() => {
     fetchGenres();
