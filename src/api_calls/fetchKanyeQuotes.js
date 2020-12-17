@@ -9,7 +9,7 @@ export const fetchKanyeQuotes = async () => {
         if (!randomKanyeQuotes.includes(kanyeQuote)) {
             randomKanyeQuotes.push(kanyeQuote);
         }
-    } while (randomKanyeQuotes.length < 2);
+    } while (randomKanyeQuotes.length < 3);
     
     return randomKanyeQuotes;
 };
