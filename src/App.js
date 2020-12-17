@@ -45,6 +45,7 @@ const App = () => {
   };
 
   const chooseSnippet = (userSelectedSnippet) => {
+    setUserText("");
     setSnippet(userSelectedSnippet);
     setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
   };
