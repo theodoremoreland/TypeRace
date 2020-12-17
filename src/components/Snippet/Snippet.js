@@ -1,17 +1,18 @@
 // React
 import React from 'react';
 
+// Semantic UI
+import { Card } from 'semantic-ui-react';
+
 // Custom styles
 import './Snippet.css';
 
-export default function Snippet({snippet}) {
+export default function Snippet({snippet, callback}) {
 
     return (
-        <>
-            <h3 className="header">Snippet</h3>
-            <div className="snippet">
-                {snippet}
-            </div>
-        </>
+        <Card
+            header={snippet}
+            onClick={() => callback(snippet)}
+        />
     );
 };

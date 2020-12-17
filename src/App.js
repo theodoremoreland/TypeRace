@@ -1,6 +1,9 @@
 // React
 import React, { useState, useEffect } from 'react';
 
+// Semantic UI
+import { Container } from 'semantic-ui-react';
+
 // Custom components
 import Snippet from './components/Snippet/Snippet';
 import Button from './components/Button/Button';
@@ -21,20 +24,11 @@ const initialGameState = {
 };
 
 const App = () => {
-  // Game variables
   const [userText, setUserText] = useState("");
   const [snippet, setSnippet] = useState("");
+  const [snippetOptions, setSnippetOptions] = useState([]);
   const [gameState, setGameState] = useState(initialGameState);
-  // Content Variables
-  const [filmNames, setFilmNames] = useState([]);
-  const [randomQuotes, setRandomQuotes] = useState([]);
-  const [kanyeQuotes, setKanyeQuotes] = useState([]);
-
-  const genres = {
-    "filmNames": filmNames
-    , "randomQuotes": randomQuotes
-    , "kanyeQuotes": kanyeQuotes
-  };
+  const [genres, setGenres] = useState({});
 
   const updateUserText = (text) => {
     setUserText(text);
@@ -44,15 +38,16 @@ const App = () => {
     }
   };
 
-  const chooseGenre = (genre) => {
-    let buttons = genres[genre].map((film) => <button onClick={() => chooseSnippet(film)}>{film}</button>);
-    return buttons
-  };
-
-  const chooseSnippet = (title) => {
-    setSnippet(title);
+  const chooseSnippet = (userSelectedSnippet) => {
+    setSnippet(userSelectedSnippet);
     setGameState( {...gameState, startTime: new Date().getTime()} );
   };
+
+  const chooseGenre = (genre) => {
+    const snippets = genres[genre];
+    setSnippetOptions(snippets);
+  };
+
 
   useEffect(() => {
     if (gameState.victory === true) {
@@ -60,16 +55,26 @@ const App = () => {
     }
   });
 
+
   useEffect(() => {
-    setFilmNames(fetchFilmNames());
-    setRandomQuotes(fetchRandomQuotes());
-    setKanyeQuotes(fetchKanyeQuotes());
+    (async () => {
+      const filmNames = await fetchFilmNames();
+      const randomQuotes = await fetchRandomQuotes();
+      const kanyeQuotes = await fetchKanyeQuotes();
+      
+      setGenres({
+        "Movie Names" : filmNames
+        ,"Random Quotes" : randomQuotes
+        ,"Kanye West Quotes": kanyeQuotes
+      });
+    })();
   }, []);
 
+
   return (
-    <div className="app">
+    <Container className="app">
       <h1 className="appTitle header">Type Race</h1>
-      <Snippet snippet={snippet} />
+      <h2 className="snippet">{snippet}</h2>
       <h4 className="gameStatus">
         {gameState.victory ? `Jam Jamboree! Time: ${gameState.totalTime}ms` : null}
       </h4>
@@ -79,7 +84,12 @@ const App = () => {
           <Button text={genre} callback={chooseGenre} />
         )
       }
-    </div>
+      {
+        snippetOptions.length !== 0
+          ? snippetOptions.map(snippet => <Snippet snippet={snippet} callback={chooseSnippet} />)
+          : ""
+      }
+    </Container>
   );
 };
 
