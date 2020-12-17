@@ -1,3 +1,19 @@
+/* ___________________ FONTS ____________________________ */
+
+@font-face {
+    font-family: header;
+    src: url('./fonts/SourceCodePro/SourceCodePro-Medium.ttf');
+}
+
+@font-face {
+    font-family: accent;
+    src: url('./fonts/SourceCodePro/SourceCodePro-Regular.ttf');
+}
+
+@font-face {
+    font-family: accent-light;
+    src: url('./fonts/SourceCodePro/SourceCodePro-Light.ttf');
+}
 
 body {
     text-align: center;
@@ -6,4 +22,8 @@ body {
 input {
     width: 75em;
     height: 2em;
+}
+
+.header {
+    font-family: header;
 }
