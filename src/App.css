@@ -19,9 +19,8 @@ body {
     text-align: center;
 }
 
-input {
-    width: 75em;
-    height: 2em;
+.appTitle {
+    margin-top: 15vh !important;
 }
 
 .header {

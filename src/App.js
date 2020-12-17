@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Semantic UI
-import { Container } from 'semantic-ui-react';
+import { Container, GridColumn, GridRow } from 'semantic-ui-react';
 
 // Custom components
 import Snippet from './components/Snippet/Snippet';
@@ -40,12 +40,24 @@ const App = () => {
 
   const chooseSnippet = (userSelectedSnippet) => {
     setSnippet(userSelectedSnippet);
-    setGameState( {...gameState, startTime: new Date().getTime()} );
+    setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
   };
 
   const chooseGenre = (genre) => {
     const snippets = genres[genre];
     setSnippetOptions(snippets);
+  };
+
+  const fetchGenres = async () => {
+    const filmNames = await fetchFilmNames();
+    const randomQuotes = await fetchRandomQuotes();
+    const kanyeQuotes = await fetchKanyeQuotes();
+    
+    setGenres({
+      "Movie Names" : filmNames
+      ,"Random Quotes" : randomQuotes
+      ,"Kanye West Quotes": kanyeQuotes
+    });
   };
 
 
@@ -55,40 +67,32 @@ const App = () => {
     }
   });
 
-
   useEffect(() => {
-    (async () => {
-      const filmNames = await fetchFilmNames();
-      const randomQuotes = await fetchRandomQuotes();
-      const kanyeQuotes = await fetchKanyeQuotes();
-      
-      setGenres({
-        "Movie Names" : filmNames
-        ,"Random Quotes" : randomQuotes
-        ,"Kanye West Quotes": kanyeQuotes
-      });
-    })();
+    fetchGenres();
   }, []);
-
 
   return (
     <Container className="app">
-      <h1 className="appTitle header">Type Race</h1>
-      <h2 className="snippet">{snippet}</h2>
-      <h4 className="gameStatus">
-        {gameState.victory ? `Jam Jamboree! Time: ${gameState.totalTime}ms` : null}
-      </h4>
-      <Input text={userText} callback={updateUserText}/>
-      {
-        Object.keys(genres).map((genre) => 
-          <Button text={genre} callback={chooseGenre} />
-        )
-      }
-      {
-        snippetOptions.length !== 0
-          ? snippetOptions.map(snippet => <Snippet snippet={snippet} callback={chooseSnippet} />)
-          : ""
-      }
+      <GridRow>
+        <GridColumn className="appContent">
+          <h1 className="appTitle header">Type Race</h1>
+          <h2 className="snippet">{snippet}</h2>
+          <h4 className="gameStatus">
+            {gameState.victory ? `Finished! Time: ${gameState.totalTime}ms` : null}
+          </h4>
+          <Input text={userText} callback={updateUserText}/>
+          {
+            Object.keys(genres).map((genre) => 
+              <Button text={genre} callback={chooseGenre} />
+            )
+          }
+          {
+            snippetOptions.length !== 0
+              ? snippetOptions.map(snippet => <Snippet snippet={snippet} callback={chooseSnippet} />)
+              : ""
+          }
+        </GridColumn>
+      </GridRow>
     </Container>
   );
 };
