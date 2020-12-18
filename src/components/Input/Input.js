@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // Semantic UI
 import { Input } from 'semantic-ui-react';
@@ -8,11 +8,19 @@ import { Input } from 'semantic-ui-react';
 import './Input.css';
 
 export default function InputWrapper({text, callback}) {
+    const inputRef = useRef();
+
+    useEffect(() => {
+        if (text === "") {
+            inputRef.current.focus();
+        }
+    }, [text]);
 
     return (
         <Input
             className="input"
             fluid
+            ref={inputRef}
             value={text}
             onChange={(event) => callback(event.target.value)}
         />
