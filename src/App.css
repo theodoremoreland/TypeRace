@@ -93,6 +93,6 @@ body,
     background-color: var(--secondary-color) !important;
 }
 
-.snippetCard {
+.card {
     color: var(--quinary-color) !important;
 }

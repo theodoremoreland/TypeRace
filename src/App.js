@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Custom components
-import Snippet from './components/Snippet/Snippet';
+import Card from './components/Card/Card';
 import Button from './components/Button/Button';
 import Input from './components/Input/Input';
 
@@ -98,7 +98,7 @@ const App = () => {
         <div className="cardGroup">
             {
                 snippetOptions.length !== 0
-                    ? snippetOptions.map(snippet => <Snippet snippet={snippet} callback={chooseSnippet} />)
+                    ? snippetOptions.map(snippet => <Card text={snippet} callback={chooseSnippet} />)
                     : ""
             }
         </div>
