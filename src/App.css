@@ -15,6 +15,32 @@
     src: url('./fonts/SourceCodePro/SourceCodePro-Light.ttf');
 }
 
+/* ------------------- VARIABLES ------------------- */
+
+:root {
+    --header-xxl: 4rem header;
+    --header-xl: 2.8rem header;
+    --header-large: 2.25rem header;
+    --header-medium: 1.85rem header;
+    --header-small: 1.5rem header;
+    --header-xs: 1.2rem header;
+
+    --body-xxl: 1.8rem body;
+    --body-xl: 1.5rem body;
+    --body-large: 1.23rem body;
+    --body-medium: 1rem body;
+    --body-small: 0.9rem body;
+
+    --accent-medium: 1rem accent;
+    --accent-small: 0.8rem accent;
+
+    --primary-color: #E85A4F;
+    --secondary-color: #E98074;
+    --tertiary-color: #8E8D8A;
+    --quaternary-color: #D8C3A5;
+    --quinary-color: #EAE7DC;
+}
+
 body {
     text-align: center;
 }
