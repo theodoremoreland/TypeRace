@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: header;
-    src: url('./fonts/SourceCodePro/SourceCodePro-Medium.ttf');
+    src: url('./fonts/SourceCodePro/SourceCodePro-Bold.ttf');
 }
 
 @font-face {
@@ -41,14 +41,58 @@
     --quinary-color: #EAE7DC;
 }
 
-body {
+/* ------------------- GLOBAL ------------------- */
+
+html,
+body,
+#root, 
+.app {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* ------------------- APP ------------------- */
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--quaternary-color);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
 .appTitle {
-    margin-top: 15vh !important;
+    font: var(--header-medium);
+    color: var(--primary-color);
 }
 
-.header {
-    font-family: header;
+.snippet {
+    color: var(--tertiary-color);
+    width: 85%;
+}
+
+.input {
+    width: 85%;
+    font: var(--body-medium);
+    color: var(--primary-color);
+}
+
+.button {
+    margin: 10px !important;
+    padding: 18px !important;
+    background-color: var(--secondary-color) !important;
+}
+
+.snippetCard {
+    color: var(--quinary-color) !important;
 }

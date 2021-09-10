@@ -12,6 +12,7 @@ export default function Snippet({snippet, callback}) {
     return (
         <Card
             header={snippet}
+            className="snippetCard"
             onClick={() => callback(snippet)}
         />
     );

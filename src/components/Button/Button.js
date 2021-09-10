@@ -12,6 +12,7 @@ export default function ButtonWrapper({text, callback}) {
     return (
         <Button
             key={text}
+            className="button"
             onClick={() => callback(text)}
         >
             {text}
