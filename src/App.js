@@ -61,9 +61,9 @@ const App = () => {
     const kanyeQuotes = await fetchKanyeQuotes();
     
     setGenres({
-      "Movie Names" : filmNames
-      ,"Random Quotes" : randomQuotes
-      ,"Kanye West Quotes": kanyeQuotes
+      "Movie names" : filmNames
+      ,"Random quotes" : randomQuotes
+      ,"Kanye West quotes": kanyeQuotes
     });
   };
 
