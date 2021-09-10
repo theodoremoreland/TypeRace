@@ -49,6 +49,7 @@ const App = () => {
 
   const chooseGenre = (genre) => {
     const snippets = genres[genre];
+
     setSnippetOptions(snippets);
   };
 
@@ -88,6 +89,7 @@ const App = () => {
             </p>
         </header>
         <Input text={userText} callback={updateUserText}/>
+        <h3>Choose a snippet type</h3>
         <div className="buttonGroup">
             {
                 Object.keys(genres).map((genre) => 
