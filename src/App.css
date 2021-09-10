@@ -72,17 +72,20 @@ body,
 }
 
 .appTitle {
-    font: var(--header-medium);
+    font: var(--header-xl);
     color: var(--primary-color);
+    margin: 0;
 }
 
 .snippet {
     color: var(--tertiary-color);
     width: 85%;
+    max-width: 550px;
 }
 
 .input {
     width: 85%;
+    max-width: 550px;
     font: var(--body-medium);
     color: var(--primary-color);
 }
