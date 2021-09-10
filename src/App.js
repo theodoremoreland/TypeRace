@@ -1,9 +1,6 @@
 // React
 import React, { useState, useEffect } from 'react';
 
-// Semantic UI
-import { Container, GridColumn, GridRow } from 'semantic-ui-react';
-
 // Custom components
 import Snippet from './components/Snippet/Snippet';
 import Button from './components/Button/Button';
@@ -82,28 +79,30 @@ const App = () => {
   }, []);
 
   return (
-    <Container className="app">
-      <GridRow>
-        <GridColumn className="appContent">
-          <h1 className="appTitle header">Type Race</h1>
-          <h2 className="snippet">{snippet}</h2>
-          <h4 className="gameStatus">
-            {gameState.victory ? `Finished! Time: ${gameState.totalTime}ms` : null}
-          </h4>
+    <main className="app">
+        <header>
+            <h1 className="appTitle header">Type Race</h1>
+            <h2 className="snippet">{snippet}</h2>
+            <p className="gameStatus">
+                {gameState.victory ? `Finished! Time: ${gameState.totalTime}ms` : null}
+            </p>
+        </header>
           <Input text={userText} callback={updateUserText}/>
-          {
-            Object.keys(genres).map((genre) => 
-              <Button text={genre} callback={chooseGenre} />
-            )
-          }
-          {
-            snippetOptions.length !== 0
-              ? snippetOptions.map(snippet => <Snippet snippet={snippet} callback={chooseSnippet} />)
-              : ""
-          }
-        </GridColumn>
-      </GridRow>
-    </Container>
+        <div className="buttonGroup">
+            {
+                Object.keys(genres).map((genre) => 
+                    <Button text={genre} callback={chooseGenre} />
+                )
+            }
+        </div>
+        <div className="cardGroup">
+            {
+                snippetOptions.length !== 0
+                    ? snippetOptions.map(snippet => <Snippet snippet={snippet} callback={chooseSnippet} />)
+                    : ""
+            }
+        </div>
+    </main>
   );
 };
 
