@@ -6,7 +6,7 @@ A React web page that tracks how long it takes the user to type a selected text 
 * JavaScript (ES6)
 * HTML5
 * CSS3
-* Semantic UI
+* ~~Semantic UI~~ (replaced with custom CSS)
 
 # Screenshots
 
