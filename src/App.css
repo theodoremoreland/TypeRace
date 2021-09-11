@@ -83,7 +83,7 @@ body,
     max-width: 550px;
 }
 
-input, .input {
+.input {
     width: 85%;
     max-width: 550px;
     font: var(--body-xxl) !important;

@@ -1,9 +1,6 @@
 // React
 import React, { useEffect, useRef } from 'react';
 
-// Semantic UI
-import { Input } from 'semantic-ui-react';
-
 // Custom styles
 import './Input.css';
 
@@ -17,13 +14,12 @@ export default function InputWrapper({text, callback}) {
     }, [text]);
 
     return (
-        <Input
-            className="input"
-            fluid
-            ref={inputRef}
-            value={text}
-            onChange={(event) => callback(event.target.value)}
-        />
-
+            <textarea
+                className="input"
+                fluid
+                ref={inputRef}
+                value={text}
+                onChange={(event) => callback(event.target.value)}
+            />
     );
 };
