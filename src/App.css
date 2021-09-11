@@ -86,6 +86,7 @@ body,
 .input {
     width: 85%;
     max-width: 550px;
+    min-height: 250px;
     font: var(--body-xxl);
     color: var(--primary-color);
     background-color: var(--quaternary-color);
@@ -102,9 +103,15 @@ body,
 .card {
     margin: 10px;
     padding: 30px;
-    height: 200px;
     width: 400px;
     font: var(--body-medium);
     color: var(--quinary-color);
-    background-color: var(--tertiary-color);
+    background-color: #e9807480;
+    transition: transform 250ms, background-color 400ms, box-shadow 400ms;
+}
+
+.card:hover {
+    transform: translateY(-5%);
+    background-color: var(--secondary-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;;
 }
