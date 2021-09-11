@@ -6,12 +6,12 @@
 }
 
 @font-face {
-    font-family: accent;
+    font-family: body;
     src: url('./fonts/SourceCodePro/SourceCodePro-Regular.ttf');
 }
 
 @font-face {
-    font-family: accent-light;
+    font-family: accent;
     src: url('./fonts/SourceCodePro/SourceCodePro-Light.ttf');
 }
 
@@ -83,19 +83,28 @@ body,
     max-width: 550px;
 }
 
-.input {
+input, .input {
     width: 85%;
     max-width: 550px;
-    font: var(--body-medium);
-    color: var(--primary-color);
+    font: var(--body-xxl) !important;
+    color: var(--primary-color) !important;
+    background-color: var(--quaternary-color) !important;
 }
 
 .button {
-    margin: 10px !important;
-    padding: 18px !important;
-    background-color: var(--secondary-color) !important;
+    margin: 10px;
+    padding: 18px;
+    font: var(--header-medium);
+    color: var(--quinary-color);
+    background-color: var(--secondary-color);
 }
 
 .card {
-    color: var(--quinary-color) !important;
+    margin: 10px;
+    padding: 30px;
+    height: 200px;
+    width: 400px;
+    font: var(--body-medium);
+    color: var(--quinary-color);
+    background-color: var(--tertiary-color);
 }
