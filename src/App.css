@@ -101,6 +101,13 @@ body,
     outline: none;
 }
 
+.groupHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: var(--header-small);
+}
+
 .button {
     margin: 10px;
     padding: 18px;

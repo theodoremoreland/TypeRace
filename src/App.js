@@ -12,6 +12,7 @@ import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
 import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
 
 // Custom styles
+import './reset.css';
 import './App.css';
 
 const initialGameState = {
@@ -65,6 +66,29 @@ const App = () => {
     });
   };
 
+  const displayGenres = (genres) => {
+    return (
+        <div className="buttonGroup">
+            <h3 className="groupHeader">Choose a genre</h3>
+            {
+                Object.keys(genres).map((genre) => 
+                    <Button key={genre} text={genre} callback={chooseGenre} />
+                )
+            }
+        </div>
+    )
+  };
+
+  const displaySnippetOptions = (snippetOptions) => {
+    return (
+        <div className="cardGroup">
+            <h3 className="groupHeader">Choose snippet</h3>
+            {
+                snippetOptions.map(snippet => <Card key={snippet} text={snippet} callback={chooseSnippet} />)
+            }
+        </div>
+    )
+  };
 
   useEffect(() => {
     if (gameState.victory === true) {
@@ -89,21 +113,16 @@ const App = () => {
             </p>
         </header>
         <Input text={userText} callback={updateUserText}/>
-        <h3>Choose a snippet type</h3>
-        <div className="buttonGroup">
-            {
-                Object.keys(genres).map((genre) => 
-                    <Button text={genre} callback={chooseGenre} />
-                )
-            }
-        </div>
-        <div className="cardGroup">
-            {
-                snippetOptions.length !== 0
-                    ? snippetOptions.map(snippet => <Card text={snippet} callback={chooseSnippet} />)
-                    : ""
-            }
-        </div>
+        {
+            Object.keys(genres).length > 0
+                ? displayGenres(genres)
+                : ""
+        }
+        {
+            snippetOptions.length > 0
+                ? displaySnippetOptions(snippetOptions)
+                : ""
+        }
     </main>
   );
 };

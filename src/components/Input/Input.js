@@ -16,7 +16,6 @@ export default function InputWrapper({text, callback}) {
     return (
             <textarea
                 className="input"
-                fluid
                 ref={inputRef}
                 value={text}
                 onChange={(event) => callback(event.target.value)}
