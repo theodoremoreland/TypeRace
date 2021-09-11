@@ -86,9 +86,9 @@ body,
 .input {
     width: 85%;
     max-width: 550px;
-    font: var(--body-xxl) !important;
-    color: var(--primary-color) !important;
-    background-color: var(--quaternary-color) !important;
+    font: var(--body-xxl);
+    color: var(--primary-color);
+    background-color: var(--quaternary-color);
 }
 
 .button {
