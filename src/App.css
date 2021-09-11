@@ -60,7 +60,7 @@ body,
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--quaternary-color);
+    background-color: var(--secondary-color);
 }
 
 .header {
@@ -73,23 +73,32 @@ body,
 
 .appTitle {
     font: var(--header-xl);
-    color: var(--primary-color);
+    color: var(--quinary-color);
     margin: 0;
+    padding: 0;
+    text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.096);
+    transform: skewY(-5deg);
 }
 
 .snippet {
-    color: var(--tertiary-color);
+    color: var(--quaternary-color);
     width: 85%;
-    max-width: 550px;
+    max-width: 750px;
 }
 
 .input {
     width: 85%;
-    max-width: 550px;
+    max-width: 750px;
     min-height: 250px;
     font: var(--body-xxl);
     color: var(--primary-color);
     background-color: var(--quaternary-color);
+    border-style: none;
+    border-radius: 8px;
+}
+
+.input:focus {
+    outline: none;
 }
 
 .button {
@@ -98,6 +107,20 @@ body,
     font: var(--header-medium);
     color: var(--quinary-color);
     background-color: var(--secondary-color);
+    border-radius: 18px;
+    border-style: solid;
+}
+
+.button:hover {
+    filter: brightness(1.1);
+}
+
+.cardGroup {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
@@ -113,5 +136,5 @@ body,
 .card:hover {
     transform: translateY(-5%);
     background-color: var(--secondary-color);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
