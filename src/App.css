@@ -51,6 +51,7 @@ body,
     padding: 0;
     height: 100%;
     width: 100%;
+    
 }
 
 /* ------------------- APP ------------------- */
@@ -69,6 +70,7 @@ body,
     justify-content: center;
     align-items: center;
     text-align: center;
+    
 }
 
 .appTitle {
@@ -78,6 +80,12 @@ body,
     padding: 0;
     text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.096);
     transform: skewY(-5deg);
+}
+
+.gameStatus {
+    font: var(--header-medium);
+    color: #000000;
+    text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.116);
 }
 
 .snippet {
@@ -95,6 +103,7 @@ body,
     background-color: var(--quaternary-color);
     border-style: none;
     border-radius: 8px;
+    
 }
 
 .input:focus {
@@ -105,13 +114,15 @@ body,
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 10px;
     font: var(--header-small);
 }
 
 .button {
     margin: 10px;
     padding: 18px;
-    font: var(--header-medium);
+    font: var(--header-small);
     color: var(--quinary-color);
     background-color: var(--secondary-color);
     border-radius: 18px;
@@ -123,7 +134,7 @@ body,
 }
 
 .cardGroup {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
