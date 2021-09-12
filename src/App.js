@@ -112,12 +112,14 @@ const App = () => {
                 {gameState.victory ? `Finished! Time: ${gameState.totalTime}ms` : null}
             </p>
         </header>
-        <Input text={userText} callback={updateUserText}/>
-        {
-            Object.keys(genres).length > 0
-                ? displayGenres(genres)
-                : ""
-        }
+        <div className="panel">
+            <Input text={userText} callback={updateUserText}/>
+            {
+                Object.keys(genres).length > 0
+                    ? displayGenres(genres)
+                    : ""
+            }
+        </div>
         {
             snippetOptions.length > 0
                 ? displaySnippetOptions(snippetOptions)

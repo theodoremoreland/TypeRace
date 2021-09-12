@@ -34,6 +34,9 @@
     --accent-medium: 1rem accent;
     --accent-small: 0.8rem accent;
 
+    --content-width: 85%;
+    --content-max-width: 1000px;
+
     --primary-color: #E85A4F;
     --secondary-color: #E98074;
     --tertiary-color: #8E8D8A;
@@ -90,20 +93,28 @@ body,
 
 .snippet {
     color: var(--quaternary-color);
-    width: 85%;
-    max-width: 750px;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
+    animation: fadeIn 1.5s forwards linear;
+}
+
+.panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
 }
 
 .input {
-    width: 85%;
-    max-width: 750px;
-    min-height: 250px;
+    width: 100%;
+    height: 100%;
     font: var(--body-xxl);
     color: var(--primary-color);
     background-color: var(--quaternary-color);
     border-style: none;
     border-radius: 8px;
-    
 }
 
 .input:focus {
@@ -120,13 +131,16 @@ body,
 }
 
 .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     animation: fadeIn 1.5s forwards linear;
 }
 
 .button {
     margin: 10px;
     padding: 18px;
-    font: var(--header-small);
+    font: var(--header-xs);
     color: var(--quinary-color);
     background-color: var(--secondary-color);
     border-radius: 18px;
@@ -138,18 +152,20 @@ body,
 }
 
 .cardGroup {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
     animation: fadeIn 1.5s forwards linear;
 }
 
 .card {
     margin: 10px;
     padding: 30px;
-    width: 400px;
+    width: 100%;
     font: var(--body-medium);
     color: var(--quinary-color);
     background-color: #e9807480;
