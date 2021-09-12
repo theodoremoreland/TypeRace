@@ -107,7 +107,11 @@ const App = () => {
     <main className="app">
         <header className="header">
             <h1 className="appTitle">Type Race</h1>
-            <h2 className="snippet">{snippet}</h2>
+            {
+                snippet
+                    ? <h2 className="snippet">{snippet}</h2>
+                    : ""
+            }
             <p className="gameStatus">
                 {gameState.victory ? `Finished! Time: ${gameState.totalTime}ms` : null}
             </p>
