@@ -1,5 +1,5 @@
 // React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // Custom components
 import Card from './components/Card/Card';
@@ -29,6 +29,7 @@ const App = () => {
     const [snippetOptions, setSnippetOptions] = useState([]);
     const [gameState, setGameState] = useState(initialGameState);
     const [genres, setGenres] = useState({});
+    const inputRef = useRef();
 
     const updateUserText = (text) => {
         setUserText(text);
@@ -51,6 +52,7 @@ const App = () => {
         setTimerIsOn(true);
         setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
         window.scrollTo(0, 0);
+        inputRef.current.focus();
     };
 
     const chooseGenre = (genre) => {
@@ -123,7 +125,7 @@ const App = () => {
                 </p>
             </header>
             <div className="panel">
-                <Input text={userText} callback={updateUserText}/>
+                <Input text={userText} callback={updateUserText} inputRef={inputRef}/>
                 {
                     Object.keys(genres).length > 0
                         ? displayGenres(genres)

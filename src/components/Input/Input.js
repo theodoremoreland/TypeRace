@@ -1,18 +1,10 @@
 // React
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 // Custom styles
 import './Input.css';
 
-export default function InputWrapper({text, callback}) {
-    const inputRef = useRef();
-
-    useEffect(() => {
-        if (text === "") {
-            inputRef.current.focus();
-        }
-    }, [text]);
-
+export default function InputWrapper({text, callback, inputRef}) {
     return (
             <textarea
                 className="input"
