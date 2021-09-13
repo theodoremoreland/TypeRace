@@ -54,23 +54,21 @@ body,
     padding: 0;
     height: 100%;
     width: 100%;
-}
-
-/* ------------------- APP ------------------- */
-
-.app {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color: var(--secondary-color);
 }
+
+/* ------------------- APP ------------------- */
 
 .header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: min-content;
     text-align: center;
 }
 
@@ -99,7 +97,7 @@ body,
 
 .panel {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: var(--content-width);
@@ -187,5 +185,13 @@ body,
   
     to {
       opacity: 1;
+    }
+}
+
+/* ------------------- MEDIA QUERIES ------------------- */
+
+@media screen and (min-width: 769px) {
+    .panel {
+        flex-direction: row;
     }
 }
