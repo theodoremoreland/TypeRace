@@ -195,4 +195,8 @@ body,
     .panel {
         flex-direction: row;
     }
+
+    .snippet {
+        font: var(--header-small);
+    }
 }
