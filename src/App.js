@@ -5,11 +5,12 @@ import React, { useState, useEffect } from 'react';
 import Card from './components/Card/Card';
 import Button from './components/Button/Button';
 import Input from './components/Input/Input';
+import Timer from './components/Timer/Timer';
 
 // Custom utils
 import { fetchFilmNames } from './api_calls/fetchFilmNames';
 import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
-import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
+// import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
 
 // Custom styles
 import './reset.css';
@@ -22,6 +23,7 @@ const initialGameState = {
 };
 
 const App = () => {
+  const [timerIsOn, setTimerIsOn] = useState(false);
   const [userText, setUserText] = useState("");
   const [snippet, setSnippet] = useState("");
   const [snippetOptions, setSnippetOptions] = useState([]);
@@ -32,19 +34,21 @@ const App = () => {
     setUserText(text);
 
     if (text === snippet && snippet !== "") {
-      setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime})
+      setTimerIsOn(false);
+      setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime});
     }
     else if (gameState.victory === true && text !== snippet) {
-      setGameState({...gameState, victory: false})
-    }
-    else if (text === "") {
-      setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
+      // code block executes after user completed game, but then deletes a character(s)
+      setUserText(""); // delete all text
+      setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} ); // reset game
+      setTimerIsOn(true); // reset timer
     }
   };
 
   const chooseSnippet = (userSelectedSnippet) => {
     setUserText("");
     setSnippet(userSelectedSnippet);
+    setTimerIsOn(true);
     setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
   };
 
@@ -57,12 +61,12 @@ const App = () => {
   const fetchGenres = async () => {
     const filmNames = await fetchFilmNames();
     const randomQuotes = await fetchRandomQuotes();
-    const kanyeQuotes = await fetchKanyeQuotes();
+     // const kanyeQuotes = await fetchKanyeQuotes();
     
     setGenres({
       "Movie names" : filmNames
       ,"Random quotes" : randomQuotes
-      ,"Kanye West quotes": kanyeQuotes
+      // ,"Kanye West quotes": kanyeQuotes
     });
   };
 
@@ -105,6 +109,7 @@ const App = () => {
 
   return (
     <main className="app">
+        <Timer timerIsOn={timerIsOn} delta={snippet} />
         <header className="header">
             <h1 className="appTitle">Type Race</h1>
             {

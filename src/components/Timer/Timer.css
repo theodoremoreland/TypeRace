@@ -1,0 +1,14 @@
+.timer {
+    z-index: 2;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0.5;
+    font: var(--header-xxl);
+    color: black;
+    text-align: center;
+    pointer-events: none;
+}
