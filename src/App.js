@@ -50,6 +50,7 @@ const App = () => {
         setSnippet(userSelectedSnippet);
         setTimerIsOn(true);
         setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
+        window.scrollTo(0, 0);
     };
 
     const chooseGenre = (genre) => {
