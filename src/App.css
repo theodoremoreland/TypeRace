@@ -68,11 +68,11 @@ body,
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: min-content;
     text-align: center;
 }
 
 .appTitle {
+    width: min-content;
     font: var(--header-xl);
     color: var(--quinary-color);
     margin: 5px 0px;
