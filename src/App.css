@@ -112,7 +112,6 @@ body,
     color: var(--primary-color);
     background-color: var(--quaternary-color);
     border-style: none;
-    border-radius: 8px;
     animation: fadeIn 1.5s forwards linear;
 }
 
