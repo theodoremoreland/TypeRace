@@ -89,6 +89,7 @@ body,
 }
 
 .snippet {
+    font: var(--header-medium);
     color: var(--quaternary-color);
     width: var(--content-width);
     max-width: var(--content-max-width);
@@ -193,9 +194,5 @@ body,
 @media screen and (min-width: 769px) {
     .panel {
         flex-direction: row;
-    }
-
-    .snippet {
-        font: var(--header-small);
     }
 }
