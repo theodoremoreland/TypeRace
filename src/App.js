@@ -10,7 +10,10 @@ import Timer from './components/Timer/Timer';
 // Custom utils
 import { fetchFilmNames } from './api_calls/fetchFilmNames';
 import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
-// import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
+import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
+import selectRandomMovieTitles from './scripts/selectRandomMovieTitles';
+import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
+import selectRandomJadenSmithTweet from './scripts/selectRandomJadenSmithTweets';
 
 // Custom styles
 import './reset.css';
@@ -62,15 +65,27 @@ const App = () => {
     };
 
     const fetchGenres = async () => {
-        const filmNames = await fetchFilmNames();
-        const randomQuotes = await fetchRandomQuotes();
-            // const kanyeQuotes = await fetchKanyeQuotes();
+        const filmNames = await fetchFilmNames().catch(e => selectRandomMovieTitles());
+        const randomQuotes = await fetchRandomQuotes().catch(e => selectRandomInspirationalQuotes());
 
-        setGenres({
-            "Movie names" : filmNames
-            ,"Random quotes" : randomQuotes
-            // ,"Kanye West quotes": kanyeQuotes
-        });
+        // The last fetch. Will try to set Kanye West quotes, uses Jaden Smith tweets upon failure.
+        await fetchKanyeQuotes()
+            .then(kanyeQuotes => {
+                setGenres({
+                    "Movie names" : filmNames
+                    ,"Random quotes" : randomQuotes
+                    ,"Kanye West quotes": kanyeQuotes
+                });
+            })
+            .catch(dontCare => {
+                const jadenSmithTweets = selectRandomJadenSmithTweet();
+
+                setGenres({
+                    "Movie names" : filmNames
+                    ,"Random quotes" : randomQuotes
+                    ,"Jaden Smith Tweets": jadenSmithTweets
+                });
+            });
     };
 
     const displayGenres = (genres) => {
