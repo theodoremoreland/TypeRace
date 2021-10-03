@@ -44,7 +44,7 @@ export default [
     "If I Was Moses Where Would I Be",
     "If Everybody In The World Dropped Out Of School We Would Have A Much More Intelligent Society.",
     "I Should Just Stop Tweeting, The Human Consciousness Must Raise Before I Speak My Juvenile Philosophy.",
-    "I Read \“The Ancient Secret of the Flower of Life\” And Ancient Texts. Things That Cant Be Pre-dated.",
+    `I Read "The Ancient Secret of the Flower of Life" And Ancient Texts. Things That Cant Be Pre-dated.`,
     "When You Think About An Apple You Also Think About The Opposite Of An Apple",
     "You Never Learn Anything In School. Think About How Many Car Accidents Happen Every Day. Driver’s Ed? What’s Up? I Still Haven’t Been To Driver’s Ed Because If Everybody I Know Has Bin In An Accident, I Can’t See How Driver’s Ed Is Really Helping Them Out.",
     "This Cute Little Blonde Baby Just Looked At Me.",
