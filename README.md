@@ -20,7 +20,6 @@ The application attempts to retreive each category of text snippet dynamically v
 
 ### Future improvements
 - Improved error handling on rejected API call
-- Caching and / or static fallback data for failed and faster loads
 - Abstract component logic into controllers where applicable
 - Write some unit tests
 - Update UI/UX to better communicate workflow and how to play
