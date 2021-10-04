@@ -12,7 +12,7 @@ The application attempts to retreive each category of text snippet dynamically v
 
 # Data sources / credits
 - Source of movie titles: https://ghibliapi.herokuapp.com/films
-- Source of qoutes (deprecated): https://api.quotable.io/random
+- Source of quotes (deprecated): https://api.quotable.io/random
 - Source of Kanye West quotes: https://api.kanye.rest
 - Source of fallback movie list: https://gist.github.com/shaikh-shahid/f29703bf7e7dc37183d5
 - Source of fallback quotes: https://type.fit/api/quotes
