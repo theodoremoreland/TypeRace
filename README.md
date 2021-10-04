@@ -19,7 +19,6 @@ The application attempts to retreive each category of text snippet dynamically v
 - Source of fallback for Kanye West quotes (i.e. Jaden Smith tweets): https://github.com/pcarn/hubot-jaden/blob/master/src/jaden.coffee
 
 ### Future improvements
-- Improved error handling on rejected API call
 - Abstract component logic into controllers where applicable
 - Write some unit tests
 - Update UI/UX to better communicate workflow and how to play
