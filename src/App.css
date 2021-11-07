@@ -119,6 +119,7 @@ body,
     font: var(--body-xxl);
     border-style: none;
     animation: fadeIn 1.5s forwards linear;
+    resize: none;
 }
 
 .input {
@@ -215,7 +216,7 @@ body,
     .panel {
         height: 500px;
     }
-    
+
     .buttonGroup {
         flex-direction: row;
     }
