@@ -4,13 +4,20 @@ import React from 'react';
 // Custom styles
 import './Input.css';
 
-export default function InputWrapper({text, callback, inputRef}) {
+export default function InputWrapper({foregroundText, callback, inputRef, backgroundText}) {
     return (
+        <div className="inputContainer">
             <textarea
                 className="input"
                 ref={inputRef}
-                value={text}
+                value={foregroundText}
                 onChange={(event) => callback(event.target.value)}
             />
+            <textarea
+                className="inputBackdrop"
+                value={backgroundText}
+                readOnly
+            />
+        </div>
     );
 };

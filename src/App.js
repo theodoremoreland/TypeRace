@@ -32,12 +32,14 @@ const App = () => {
     const [snippetOptions, setSnippetOptions] = useState([]);
     const [gameState, setGameState] = useState(initialGameState);
     const [genres, setGenres] = useState({});
+    const [timeoutID, setTimeoutID] = useState();
     const inputRef = useRef();
+    const appContainerRef = useRef();
 
     const updateUserText = (text) => {
         setUserText(text);
 
-        if (text === snippet && snippet !== "") {
+        if (text.replace(/\n/g, " ") === snippet && snippet !== "") {
             setTimerIsOn(false);
             setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime});
         }
@@ -51,7 +53,7 @@ const App = () => {
 
     const chooseSnippet = (userSelectedSnippet) => {
         setUserText("");
-        setSnippet(userSelectedSnippet);
+        setSnippet(userSelectedSnippet.replace(/[’]/g, "'"));
         setTimerIsOn(true);
         setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
         window.scrollTo(0, 0);
@@ -62,6 +64,12 @@ const App = () => {
         const snippets = genres[genre];
 
         setSnippetOptions(snippets);
+
+        setTimeoutID(setTimeout(() => {
+                                window.scrollTo(0, 4000);
+                                clearTimeout(timeoutID);
+                            }, 200));
+        
     };
 
     const fetchGenres = async () => {
@@ -91,7 +99,6 @@ const App = () => {
     const displayGenres = (genres) => {
         return (
             <div className="buttonGroup">
-                <h3 className="groupHeader">Choose a genre</h3>
                 {
                     Object.keys(genres).map((genre) => 
                         <Button key={genre} text={genre} callback={chooseGenre} />
@@ -126,21 +133,25 @@ const App = () => {
     }, []);
 
     return (
-        <main className="app">
+        <main className="app" ref={appContainerRef}>
             <Timer timerIsOn={timerIsOn} delta={snippet} />
             <header className="header">
                 <h1 className="appTitle">Type Race</h1>
-                {
-                    snippet
-                        ? <h2 className="snippet">{snippet}</h2>
-                        : ""
-                }
                 <p className="gameStatus">
-                    {gameState.victory ? `Finished! Time: ${gameState.totalTime}ms` : null}
+                    {
+                        gameState.victory
+                            ? `Finished! Time: ${gameState.totalTime}ms @${ Math.floor( snippet.split(" ").length / ((gameState.totalTime / 1000) / 60) ) }WPM`
+                            : null
+                    }
                 </p>
             </header>
             <div className="panel">
-                <Input text={userText} callback={updateUserText} inputRef={inputRef}/>
+                <Input
+                    foregroundText={userText}
+                    callback={updateUserText}
+                    inputRef={inputRef}
+                    backgroundText={snippet}
+                />
                 {
                     Object.keys(genres).length > 0
                         ? displayGenres(genres)

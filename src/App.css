@@ -35,7 +35,7 @@
     --accent-small: 0.8rem accent;
 
     --content-width: 85%;
-    --content-max-width: 1000px;
+    --content-max-width: 2160px;
 
     --primary-color: #E85A4F;
     --secondary-color: #E98074;
@@ -101,23 +101,42 @@ body,
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 500px;
     width: var(--content-width);
     max-width: var(--content-max-width);
 }
 
-.input {
+.inputContainer {
+    position: relative;
     width: 100%;
     height: 100%;
-    min-height: 150px;
+    min-height: 250px;
+}
+
+.input, .inputBackdrop {
+    width: 100%;
+    height: 100%;
     font: var(--body-xxl);
-    color: var(--primary-color);
-    background-color: var(--quaternary-color);
     border-style: none;
     animation: fadeIn 1.5s forwards linear;
 }
 
+.input {
+    outline: none;
+    z-index: 2;
+    position: absolute;
+    color: var(--primary-color);
+    background-color: #00000000;
+}
+
 .input:focus {
     outline: none;
+}
+
+.inputBackdrop {
+    color: #8E8D8A;
+    background-color: var(--quaternary-color);
+    pointer-events: none;
 }
 
 .groupHeader {
@@ -166,6 +185,7 @@ body,
     padding: 30px;
     width: 100%;
     font: var(--body-medium);
+    text-align: center;
     color: var(--quinary-color);
     background-color: #e9807480;
     transition: transform 250ms, background-color 400ms, box-shadow 400ms;
@@ -192,7 +212,7 @@ body,
 /* ------------------- MEDIA QUERIES ------------------- */
 
 @media screen and (min-width: 769px) {
-    .panel {
+    .buttonGroup {
         flex-direction: row;
     }
 }
