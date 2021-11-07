@@ -28,23 +28,29 @@ The application attempts to retreive each category of text snippet dynamically v
 ## Default view (Galaxy Fold emulation)
 <img src="presentation/1.PNG" width="250">
 
-## After selecting random quotes as genre and scrolling down to view snippets (Galaxy Fold emulation)
+## After selecting random quotes as genre, application automatically scrolls down (Galaxy Fold emulation)
 <img src="presentation/2.PNG" width="250">
 
 ## After choosing a random snippet and beginning type race (Galaxy Fold emulation)
 <img src="presentation/3.PNG" width="250">
 
-## After completing type race (Galaxy Fold emulation)
+## Mid game. Typed characters (pink) overlay selected snippet (grey) - (Galaxy Fold emulation)
 <img src="presentation/4.PNG" width="250">
 
-## Default view prior to selecting Kanye West quotes
+## After completing type race. Displays time in milliseconds and words per minute (Galaxy Fold emulation)
+<img src="presentation/4-2.PNG" width="250">
+
+## Default view (Desktop)
 <img src="presentation/5.PNG" width="800">
 
-## Prior to selecting a Kanye West quote
+## After selecting random quote genre. Automatically scrolls down (Desktop)
 <img src="presentation/6.PNG" width="800">
 
-## After selecting a Kanye West quote and starting type race
+## After selecting a random quote and starting type race (Desktop)
 <img src="presentation/7.PNG" width="800">
 
-## After completing type race
+## Mid game. Typed characters (pink) overlay selected snippet (grey) - (Desktop)
 <img src="presentation/8.PNG" width="800">
+
+## After completing type race. Displays time in milliseconds and words per minute (Desktop)
+<img src="presentation/9.PNG" width="800">
