@@ -214,7 +214,7 @@ body,
 
 @media screen and (min-width: 769px) {
     .panel {
-        height: 500px;
+        height: 400px;
     }
 
     .buttonGroup {
