@@ -152,12 +152,12 @@ const App = () => {
                     inputRef={inputRef}
                     backgroundText={snippet}
                 />
-                {
-                    Object.keys(genres).length > 0
-                        ? displayGenres(genres)
-                        : ""
-                }
             </div>
+            {
+                Object.keys(genres).length > 0
+                    ? displayGenres(genres)
+                    : ""
+            }
             {
                 snippetOptions.length > 0
                     ? displaySnippetOptions(snippetOptions)
