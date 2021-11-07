@@ -10,7 +10,7 @@ The application attempts to retreive each category of text snippet dynamically v
 * CSS3
 * ~~Semantic UI~~ (replaced with custom CSS)
 
-# Quality of life features
+### Quality of life features
 - Clicking on a snippet genre automatically scrolls to the bottom of the page thus putting snippets in view.
 - Selecting a snippet automatically scrolls the user to the top of the textarea and focuses on the textarea thus enabling the user to start typing immediately.
 - Chosen text snippet appears as grey text in the textarea. Characters typed by the user is then overlayed over the grey text thus providing clear visual of the accuracy of the characters typed.
