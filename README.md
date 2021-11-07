@@ -17,7 +17,7 @@ The application attempts to retreive each category of text snippet dynamically v
 - Pressing enter is treated the same as pressing a space thus users can choose to press enter to align their overlayed text with the snippet in the textarea immediately or continue typing without pressing enter such that the text wraps to a new line automatically. This allows the player to choose whatever style comes more naturally.
 - Deleting any character after the game ends will automatically clear the textarea and reset the game thus providing an easy way to restart the game (i.e. the player doesn't have to reload the page or re-select another snippet).
 
-# Data sources / credits
+### Data sources / credits
 - Source of movie titles: https://ghibliapi.herokuapp.com/films
 - Source of quotes (deprecated): https://api.quotable.io/random
 - Source of Kanye West quotes: https://api.kanye.rest
