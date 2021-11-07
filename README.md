@@ -28,7 +28,6 @@ The application attempts to retreive each category of text snippet dynamically v
 ### Future improvements
 - Abstract component logic into controllers where applicable
 - Write some unit tests
-- Update UI/UX to better communicate workflow and how to play
 
 # Screenshots
 
