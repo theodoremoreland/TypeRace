@@ -44,7 +44,7 @@ export default function Timer({timerIsOn, delta}) {
     return (
         <>
             {
-                time !== undefined
+                !Number.isNaN(time)
                     ?   <p className="timer">
                             {time}
                         </p>

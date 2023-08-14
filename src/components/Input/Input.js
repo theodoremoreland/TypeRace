@@ -10,6 +10,7 @@ export default function InputWrapper({foregroundText, callback, inputRef, backgr
             <textarea
                 className="input"
                 ref={inputRef}
+                spellCheck={false}
                 value={foregroundText}
                 onChange={(event) => callback(event.target.value)}
             />

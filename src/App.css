@@ -63,6 +63,16 @@ body,
 
 /* ------------------- APP ------------------- */
 
+.backdrop {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000094;
+}
+
 .header {
     display: flex;
     flex-direction: column;
@@ -196,6 +206,14 @@ body,
     transform: translateY(-5%);
     background-color: var(--secondary-color);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+.waiting-on-user-to-choose-snippet {
+    z-index: 3;
+}
+
+.waiting-on-user-to-choose-snippet > .groupHeader {
+    color: #EAE7DC;
 }
 
 /* ------------------- KEYFRAMES ------------------- */

@@ -25,6 +25,8 @@ const initialGameState = {
   , totalTime: null
 };
 
+const extractErrorMessage = (error) => error instanceof Error ? error.message : String(error);
+
 const App = () => {
     const [timerIsOn, setTimerIsOn] = useState(false);
     const [userText, setUserText] = useState("");
@@ -33,6 +35,7 @@ const App = () => {
     const [gameState, setGameState] = useState(initialGameState);
     const [genres, setGenres] = useState({});
     const [timeoutID, setTimeoutID] = useState();
+    const [isWaitingOnUserToChooseSnippet, setIsWaitingOnUserToChooseSnippet] = useState(false);
     const inputRef = useRef();
     const appContainerRef = useRef();
 
@@ -52,6 +55,7 @@ const App = () => {
     };
 
     const chooseSnippet = (userSelectedSnippet) => {
+        setIsWaitingOnUserToChooseSnippet(false);
         setUserText("");
         setSnippet(userSelectedSnippet.replace(/[’]/g, "'"));
         setTimerIsOn(true);
@@ -64,7 +68,10 @@ const App = () => {
         const snippets = genres[genre];
 
         setSnippetOptions(snippets);
-
+        setTimerIsOn(false);
+        setSnippet("");
+        setGameState(initialGameState);
+        setIsWaitingOnUserToChooseSnippet(true);
         setTimeoutID(setTimeout(() => {
                                 window.scrollTo(0, 4000);
                                 clearTimeout(timeoutID);
@@ -73,27 +80,46 @@ const App = () => {
     };
 
     const fetchGenres = async () => {
-        const filmNames = await fetchFilmNames().catch(e => selectRandomMovieTitles());
-        const randomQuotes = await fetchRandomQuotes().catch(e => selectRandomInspirationalQuotes());
+        let filmNames;
+        let randomQuotes;
+        let kanyeQuotes;
 
-        // The last fetch. Will try to set Kanye West quotes, uses Jaden Smith tweets upon failure.
-        await fetchKanyeQuotes()
-            .then(kanyeQuotes => {
-                setGenres({
-                    "Movie names" : filmNames
-                    ,"Random quotes" : randomQuotes
-                    ,"Kanye West quotes": kanyeQuotes
-                });
-            })
-            .catch(dontCare => {
-                const jadenSmithTweets = selectRandomJadenSmithTweet();
+        try {
+            filmNames = await fetchFilmNames();
+        } catch (error) {
+            console.error(extractErrorMessage(error));
 
-                setGenres({
-                    "Movie names" : filmNames
-                    ,"Random quotes" : randomQuotes
-                    ,"Jaden Smith Tweets": jadenSmithTweets
-                });
+            filmNames = selectRandomMovieTitles();
+        }
+
+        try {
+            randomQuotes = await fetchRandomQuotes();
+        } catch (error) {
+            console.error(extractErrorMessage(error));
+
+            randomQuotes = selectRandomInspirationalQuotes();
+        }
+
+        try {
+            kanyeQuotes = await fetchKanyeQuotes();
+
+            setGenres({
+                "Movie names" : filmNames
+                ,"Random quotes" : randomQuotes
+                ,"Kanye West quotes": kanyeQuotes
             });
+
+        } catch (error) {
+            console.error(extractErrorMessage(error));
+
+            const jadenSmithTweets = selectRandomJadenSmithTweet();
+
+            setGenres({
+                "Movie names" : filmNames
+                ,"Random quotes" : randomQuotes
+                ,"Jaden Smith Tweets": jadenSmithTweets
+            });
+        }
     };
 
     const displayGenres = (genres) => {
@@ -110,7 +136,7 @@ const App = () => {
 
     const displaySnippetOptions = (snippetOptions) => {
         return (
-            <div className="cardGroup">
+            <div className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}>
                 <h3 className="groupHeader">Choose snippet</h3>
                 {
                     snippetOptions.map(snippet => <Card key={snippet} text={snippet} callback={chooseSnippet} />)
@@ -121,7 +147,7 @@ const App = () => {
 
     useEffect(() => {
         if (gameState.victory === true) {
-            document.title = 'Victory!';
+            document.title = 'Finished!';
         }
         else {
             document.title = 'Type Race';
@@ -134,6 +160,7 @@ const App = () => {
 
     return (
         <main className="app" ref={appContainerRef}>
+            {isWaitingOnUserToChooseSnippet && <div className='backdrop' /> }
             <Timer timerIsOn={timerIsOn} delta={snippet} />
             <header className="header">
                 <h1 className="appTitle">Type Race</h1>
