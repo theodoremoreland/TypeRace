@@ -8,7 +8,6 @@ The application attempts to retreive each category of text snippet dynamically v
 * JavaScript (ES6)
 * HTML5
 * CSS3
-* ~~Semantic UI~~ (replaced with custom CSS)
 
 ### Quality of life features
 - Clicking on a snippet genre automatically scrolls to the bottom of the page thus putting snippets in view.

@@ -9,12 +9,11 @@
     "jssoup": "0.0.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "5.0.1",
-    "semantic-ui-css": "^2.4.1"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
