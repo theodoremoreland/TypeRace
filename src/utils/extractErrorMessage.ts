@@ -1,1 +1,1 @@
-export default (error: any) => error instanceof Error ? error.message : String(error);
+export default (error: any): string => error instanceof Error ? error.message : String(error);

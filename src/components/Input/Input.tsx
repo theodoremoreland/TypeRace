@@ -4,7 +4,14 @@ import React from 'react';
 // Custom styles
 import './Input.css';
 
-export default function InputWrapper({foregroundText, callback, inputRef, backgroundText}) {
+interface Props {
+    foregroundText: string;
+    callback: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    inputRef: React.MutableRefObject<HTMLTextAreaElement | null>;
+    backgroundText: string;
+}
+
+export default function InputWrapper({ foregroundText, callback, inputRef, backgroundText }: Props) {
     return (
         <div className="inputContainer">
             <textarea
@@ -12,7 +19,7 @@ export default function InputWrapper({foregroundText, callback, inputRef, backgr
                 ref={inputRef}
                 spellCheck={false}
                 value={foregroundText}
-                onChange={(event) => callback(event.target.value)}
+                onChange={callback}
             />
             <textarea
                 className="inputBackdrop"

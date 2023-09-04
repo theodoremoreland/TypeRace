@@ -1,14 +1,14 @@
 import inspirationalQuotes from "../data/inspirational-quotes";
 
 /**
- * Returns a randomized list of 6 inspirational quotes
+ * Returns a randomized list of 6 inspirational quotes.
  */
-export default () => {
-    const randomInspirationalQuotes = [];
+export default (): string[] => {
+    const randomInspirationalQuotes: string[] = [];
 
     for (let i = 0; i < 6; i++) {
-        let randomIndex = Math.floor(Math.random() * inspirationalQuotes.length);
-        let randomInspirationalQuote = inspirationalQuotes[randomIndex].text;
+        let randomIndex: number = Math.floor(Math.random() * inspirationalQuotes.length);
+        let randomInspirationalQuote: string = inspirationalQuotes[randomIndex].text;
 
         while (randomInspirationalQuotes.includes(randomInspirationalQuote)) {
             randomIndex = Math.floor(Math.random() * inspirationalQuotes.length);

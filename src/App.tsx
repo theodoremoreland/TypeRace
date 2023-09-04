@@ -1,5 +1,13 @@
 // React
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ReactElement, useReducer } from 'react';
+
+// Third party
+import { useQuery } from '@tanstack/react-query';
+
+// Custom
+import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
+import extractErrorMessage from './utils/extractErrorMessage';
+import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
 
 // Custom components
 import Card from './components/Card/Card';
@@ -7,186 +15,124 @@ import Button from './components/Button/Button';
 import Input from './components/Input/Input';
 import Timer from './components/Timer/Timer';
 
-// Custom
-import { fetchFilmNames } from './api_calls/fetchFilmNames';
-import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
-import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
-import selectRandomMovieTitles from './scripts/selectRandomMovieTitles';
-import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
-import selectRandomJadenSmithTweet from './scripts/selectRandomJadenSmithTweets';
-import extractErrorMessage from './utils/extractErrorMessage';
+// Controller
+import { GameActionType, Genres, gameReducer, initialGameState, updateDocumentTitle } from './App.controller';
+
 
 // Custom styles
 import './reset.css';
 import './App.css';
 
-const initialGameState = {
-  victory: false
-  , startTime: null
-  , totalTime: null
-};
 
-const App = () => {
-    const [timerIsOn, setTimerIsOn] = useState(false);
-    const [userText, setUserText] = useState("");
-    const [snippet, setSnippet] = useState("");
-    const [snippetOptions, setSnippetOptions] = useState([]);
-    const [gameState, setGameState] = useState(initialGameState);
-    const [genres, setGenres] = useState({});
-    const [timeoutID, setTimeoutID] = useState();
-    const [isWaitingOnUserToChooseSnippet, setIsWaitingOnUserToChooseSnippet] = useState(false);
-    const inputRef = useRef();
-    const appContainerRef = useRef();
+const App = (): ReactElement => {
+    // Refs
+    const inputRef = useRef<HTMLTextAreaElement | null>(null);
+    const appContainerRef = useRef<HTMLElement | null>(null);
 
-    const updateUserText = (text) => {
-        setUserText(text);
+    // Game state
+    const [gameState, gameDispatch] = useReducer(gameReducer, initialGameState);
 
-        if (text.replace(/\n/g, " ") === snippet && snippet !== "") {
-            setTimerIsOn(false);
-            setGameState({...gameState, victory: true, totalTime: new Date().getTime() - gameState.startTime});
-        }
-        else if (gameState.victory === true && text !== snippet) {
-            // code block executes after user completed game, but then deletes a character(s)
-            setUserText(""); // delete all text
-            setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} ); // reset game
-            setTimerIsOn(true); // reset timer
-        }
-    };
+    // App state
+    const [snippetOptions, setSnippetOptions] = useState<string[]>([]);
+    const [isWaitingOnUserToChooseSnippet, setIsWaitingOnUserToChooseSnippet] = useState<boolean>(false);
+    const [timeoutID, setTimeoutID] = useState<number | undefined>(undefined);
 
-    const chooseSnippet = (userSelectedSnippet) => {
-        setIsWaitingOnUserToChooseSnippet(false);
-        setUserText("");
-        setSnippet(userSelectedSnippet.replace(/[’]/g, "'"));
-        setTimerIsOn(true);
-        setGameState( {...gameState, "victory": false, startTime: new Date().getTime()} );
-        window.scrollTo(0, 0);
-        inputRef.current.focus();
-    };
+    const { data, isLoading, refetch, isError } = useQuery({
+        queryKey: ["quotes"],
+        queryFn: () => fetchRandomQuotes(),
+        onError: (err: any) => {
+            console.error(extractErrorMessage(err));
+        },
+        cacheTime: 300_000,
+        staleTime: 240_000,
+        retry: false,
+        enabled: true,
+    });
 
-    const chooseGenre = (genre) => {
-        const snippets = genres[genre];
-
-        setSnippetOptions(snippets);
-        setTimerIsOn(false);
-        setSnippet("");
-        setGameState(initialGameState);
-        setIsWaitingOnUserToChooseSnippet(true);
-        setTimeoutID(setTimeout(() => {
-                                window.scrollTo(0, 4000);
-                                clearTimeout(timeoutID);
-                            }, 200));
-        
-    };
-
-    const fetchGenres = async () => {
-        let filmNames;
-        let randomQuotes;
-        let kanyeQuotes;
-
-        try {
-            filmNames = await fetchFilmNames();
-        } catch (error) {
-            console.error(extractErrorMessage(error));
-
-            filmNames = selectRandomMovieTitles();
-        }
-
-        try {
-            randomQuotes = await fetchRandomQuotes();
-        } catch (error) {
-            console.error(extractErrorMessage(error));
-
-            randomQuotes = selectRandomInspirationalQuotes();
-        }
-
-        try {
-            kanyeQuotes = await fetchKanyeQuotes();
-
-            setGenres({
-                "Movie names" : filmNames
-                ,"Random quotes" : randomQuotes
-                ,"Kanye West quotes": kanyeQuotes
-            });
-
-        } catch (error) {
-            console.error(extractErrorMessage(error));
-
-            const jadenSmithTweets = selectRandomJadenSmithTweet();
-
-            setGenres({
-                "Movie names" : filmNames
-                ,"Random quotes" : randomQuotes
-                ,"Jaden Smith Tweets": jadenSmithTweets
-            });
-        }
-    };
-
-    const displayGenres = (genres) => {
-        return (
-            <div className="buttonGroup">
-                {
-                    Object.keys(genres).map((genre) => 
-                        <Button key={genre} text={genre} callback={chooseGenre} />
-                    )
-                }
-            </div>
-        )
-    };
-
-    const displaySnippetOptions = (snippetOptions) => {
-        return (
-            <div className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}>
-                <h3 className="groupHeader">Choose snippet</h3>
-                {
-                    snippetOptions.map(snippet => <Card key={snippet} text={snippet} callback={chooseSnippet} />)
-                }
-            </div>
-        )
+    const chooseSnippet = (userSelectedSnippet: string) => {
+        gameDispatch({ type: GameActionType.Start, targetText: userSelectedSnippet.replace(/[’]/g, "'") });
     };
 
     useEffect(() => {
-        if (gameState.victory === true) {
-            document.title = 'Finished!';
+        if (data) {
+            setSnippetOptions(data);
+        }
+    }, [data]);
+
+    useEffect(() => {
+        if (isError) {
+            setSnippetOptions(selectRandomInspirationalQuotes());
+        }
+    }, [isError]);
+
+    useEffect(() => {
+        if (gameState.isVictory === true) {
+            updateDocumentTitle('Finished!');
         }
         else {
-            document.title = 'Type Race';
+            updateDocumentTitle('Type Race');
         };
-    }, [gameState.victory]);
+    }, [gameState.isVictory]);
 
     useEffect(() => {
-        fetchGenres();
-    }, []);
+        if (gameState.typedText.replace(/\n/g, " ") === gameState.targetText && gameState.targetText !== "") {
+            gameDispatch({ type: GameActionType.Finish });
+        } else if (gameState.isVictory === true && gameState.typedText !== gameState.targetText) {
+            gameDispatch({ type: GameActionType.Restart });
+        }
+    }, [gameState.typedText]);
+
+    useEffect(() => {
+        if (snippetOptions.length > 0) {
+            gameDispatch({ type: GameActionType.Clear });
+            setIsWaitingOnUserToChooseSnippet(true);
+            setTimeoutID(setTimeout(() => {
+                                    window.scrollTo(0, 4000);
+                                    clearTimeout(timeoutID);
+                                }, 200));    
+        }
+    }, [snippetOptions]);
+
+    useEffect(() => {
+        if (gameState.targetText) {
+            setIsWaitingOnUserToChooseSnippet(false);
+    
+            window.scrollTo(0, 0);
+            
+            inputRef?.current?.focus();
+        }
+    }, [gameState.targetText]);
 
     return (
         <main className="app" ref={appContainerRef}>
             {isWaitingOnUserToChooseSnippet && <div className='backdrop' /> }
-            <Timer timerIsOn={timerIsOn} delta={snippet} />
+            <Timer timerIsOn={gameState.timerIsOn} delta={gameState.targetText} />
             <header className="header">
                 <h1 className="appTitle">Type Race</h1>
                 <p className="gameStatus">
                     {
-                        gameState.victory
-                            ? `Finished! Time: ${gameState.totalTime}ms @${ Math.floor( snippet.split(" ").length / ((gameState.totalTime / 1000) / 60) ) }WPM`
+                        gameState.isVictory
+                            ? `Finished! Time: ${gameState.totalTime}ms @${ Math.floor( gameState.targetText.split(" ").length / (((gameState.totalTime as number) / 1000) / 60) ) }WPM`
                             : null
                     }
                 </p>
             </header>
             <div className="panel">
                 <Input
-                    foregroundText={userText}
-                    callback={updateUserText}
+                    foregroundText={gameState.typedText}
+                    callback={(e: React.ChangeEvent<HTMLTextAreaElement>) => gameDispatch({ type: GameActionType.Continue, typedText: e.target.value })}
                     inputRef={inputRef}
-                    backgroundText={snippet}
+                    backgroundText={gameState.targetText}
                 />
             </div>
             {
-                Object.keys(genres).length > 0
-                    ? displayGenres(genres)
-                    : ""
-            }
-            {
                 snippetOptions.length > 0
-                    ? displaySnippetOptions(snippetOptions)
+                    ?             <div className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}>
+                    <h3 className="groupHeader">Choose a quote</h3>
+                    {
+                        snippetOptions.map(snippet => <Card key={snippet} text={snippet} callback={chooseSnippet} />)
+                    }
+                </div>
                     : ""
             }
         </main>

@@ -1,16 +1,16 @@
-export const fetchRandomQuotes = async () => {
-    const randomizedQoutes = [];
+export const fetchRandomQuotes = async (): Promise<string[]> => {
+    const randomizedQuotes: string[] = [];
     
     do {
-      const response = await fetch('https://api.quotable.io/random');
+      const response: Response = await fetch('https://api.quotable.io/random');
       const json = await response.json();
       const quote = json.content;
 
-      if (!randomizedQoutes.includes(quote)) {
-        randomizedQoutes.push(quote)
+      if (!randomizedQuotes.includes(quote)) {
+        randomizedQuotes.push(quote);
       }
 
-    } while (randomizedQoutes.length < 3);
+    } while (randomizedQuotes.length < 3);
 
-    return randomizedQoutes;
+    return randomizedQuotes;
 };
