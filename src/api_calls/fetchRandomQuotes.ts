@@ -1,10 +1,10 @@
 export const fetchRandomQuotes = async () => {
-    let randomizedQoutes = [];
+    const randomizedQoutes = [];
     
     do {
-      let response = await fetch('https://api.quotable.io/random');
-      let json = await response.json();
-      let quote = json.content;
+      const response = await fetch('https://api.quotable.io/random');
+      const json = await response.json();
+      const quote = json.content;
 
       if (!randomizedQoutes.includes(quote)) {
         randomizedQoutes.push(quote)

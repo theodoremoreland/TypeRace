@@ -1,10 +1,10 @@
 export const fetchKanyeQuotes = async () => {
-    let randomKanyeQuotes = [];
+    const randomKanyeQuotes = [];
 
     do {
-        let response = await fetch('https://api.kanye.rest');
-        let json = await response.json();
-        let kanyeQuote = json.quote;
+        const response = await fetch('https://api.kanye.rest');
+        const json = await response.json();
+        const kanyeQuote = json.quote;
 
         if (!randomKanyeQuotes.includes(kanyeQuote)) {
             randomKanyeQuotes.push(kanyeQuote);

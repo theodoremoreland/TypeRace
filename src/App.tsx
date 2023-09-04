@@ -7,13 +7,14 @@ import Button from './components/Button/Button';
 import Input from './components/Input/Input';
 import Timer from './components/Timer/Timer';
 
-// Custom utils
+// Custom
 import { fetchFilmNames } from './api_calls/fetchFilmNames';
 import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
 import { fetchKanyeQuotes } from './api_calls/fetchKanyeQuotes';
 import selectRandomMovieTitles from './scripts/selectRandomMovieTitles';
 import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
 import selectRandomJadenSmithTweet from './scripts/selectRandomJadenSmithTweets';
+import extractErrorMessage from './utils/extractErrorMessage';
 
 // Custom styles
 import './reset.css';
@@ -24,8 +25,6 @@ const initialGameState = {
   , startTime: null
   , totalTime: null
 };
-
-const extractErrorMessage = (error) => error instanceof Error ? error.message : String(error);
 
 const App = () => {
     const [timerIsOn, setTimerIsOn] = useState(false);

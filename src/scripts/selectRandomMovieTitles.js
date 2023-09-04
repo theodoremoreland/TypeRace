@@ -1,4 +1,4 @@
-import movieTitles from "../data/movie-titles.js";
+import movieTitles from "../data/movie-titles";
 
 /**
  * Returns a randomized list of 6 movie titles
