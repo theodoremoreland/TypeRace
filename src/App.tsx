@@ -11,13 +11,11 @@ import selectRandomInspirationalQuotes from './scripts/selectRandomInspirational
 
 // Custom components
 import Card from './components/Card/Card';
-import Button from './components/Button/Button';
 import Input from './components/Input/Input';
 import Timer from './components/Timer/Timer';
 
 // Controller
-import { GameActionType, Genres, gameReducer, initialGameState, updateDocumentTitle } from './App.controller';
-
+import { GameActionType, gameReducer, initialGameState, updateDocumentTitle } from './App.controller';
 
 // Custom styles
 import './reset.css';
