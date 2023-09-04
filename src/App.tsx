@@ -37,10 +37,8 @@ const App = (): ReactElement => {
 
     const { data, isLoading, refetch, isError } = useQuery({
         queryKey: ["quotes"],
-        queryFn: () => fetchRandomQuotes(),
-        onError: (err: any) => {
-            console.error(extractErrorMessage(err));
-        },
+        queryFn: fetchRandomQuotes,
+        onError: (err: any) => console.error(extractErrorMessage(err)),
         cacheTime: 300_000,
         staleTime: 240_000,
         retry: false,
@@ -103,7 +101,7 @@ const App = (): ReactElement => {
 
     return (
         <main className="app" ref={appContainerRef}>
-            {isWaitingOnUserToChooseSnippet && <div className='backdrop' /> }
+            { isWaitingOnUserToChooseSnippet && <div className='backdrop' /> }
             <Timer timerIsOn={gameState.timerIsOn} delta={gameState.targetText} />
             <header className="header">
                 <h1 className="appTitle">Type Race</h1>
@@ -125,13 +123,14 @@ const App = (): ReactElement => {
             </div>
             {
                 snippetOptions.length > 0
-                    ?             <div className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}>
-                    <h3 className="groupHeader">Choose a quote</h3>
-                    {
-                        snippetOptions.map(snippet => <Card key={snippet} text={snippet} callback={chooseSnippet} />)
-                    }
-                </div>
-                    : ""
+                    ?
+                        <div className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}>
+                            <h3 className="groupHeader">Choose a quote</h3>
+                            {
+                                snippetOptions.map(snippet => <Card key={snippet} text={snippet} callback={chooseSnippet} />)
+                            }
+                        </div>
+                    :   ""
             }
         </main>
     );
