@@ -31,8 +31,8 @@ const App = (): ReactElement => {
     const [gameState, gameDispatch] = useReducer(gameReducer, initialGameState);
 
     // App state
-    const [snippetOptions, setSnippetOptions] = useState<string[]>([]);
-    const [isWaitingOnUserToChooseSnippet, setIsWaitingOnUserToChooseSnippet] = useState<boolean>(false);
+    const [availableQuotes, setAvailableQuotes] = useState<string[]>([]);
+    const [isWaitingOnUserToChooseQuote, setIsWaitingOnUserToChooseQuote] = useState<boolean>(false);
 
     const { data, isError, refetch } = useQuery({
         queryKey: ['quotes'],
@@ -44,26 +44,26 @@ const App = (): ReactElement => {
         enabled: true,
     });
 
-    const chooseSnippet = useCallback((userSelectedSnippet: string) => {
-        gameDispatch({ type: GameActionType.Start, targetText: userSelectedSnippet.replace(/[’]/g, "'") });
+    const chooseQuote = useCallback((selectedQuote: string) => {
+        gameDispatch({ type: GameActionType.Start, targetText: selectedQuote.replace(/[’]/g, "'") });
     }, []);
 
     useEffect(() => {
         if (data) {
             gameDispatch({ type: GameActionType.Clear });
-            setSnippetOptions(data);
+            setAvailableQuotes(data);
         }
     }, [data]);
 
     useEffect(() => {
         if (isError) {
-            setSnippetOptions(selectRandomInspirationalQuotes());
+            setAvailableQuotes(selectRandomInspirationalQuotes());
         }
     }, [isError]);
 
     useEffect(() => {
-        setIsWaitingOnUserToChooseSnippet(true);
-    }, [snippetOptions]);
+        setIsWaitingOnUserToChooseQuote(true);
+    }, [availableQuotes]);
 
     useEffect(() => {
         if (gameState.isVictory === true) {
@@ -88,7 +88,7 @@ const App = (): ReactElement => {
 
     useEffect(() => {
         if (gameState.targetText) {
-            setIsWaitingOnUserToChooseSnippet(false);
+            setIsWaitingOnUserToChooseQuote(false);
 
             window.scrollTo(0, 0);
 
@@ -98,7 +98,7 @@ const App = (): ReactElement => {
 
     return (
         <main className="app" ref={appContainerRef}>
-            {isWaitingOnUserToChooseSnippet && <div className="backdrop" />}
+            {isWaitingOnUserToChooseQuote && <div className="backdrop" />}
             <Timer timerIsOn={gameState.timerIsOn} delta={gameState.targetText} />
             <header className="header">
                 <h1 className="appTitle">Type Race</h1>
@@ -111,11 +111,7 @@ const App = (): ReactElement => {
                 </p>
             </header>
             <div className="panel">
-                <div
-                    className={`${
-                        isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''
-                    } description`}
-                >
+                <div className={`${isWaitingOnUserToChooseQuote ? 'waiting-on-user-to-choose-quote' : ''} description`}>
                     Practice your typing speed while reading words of wisdom by choosing a special quote below. If the
                     quotes below do not interest you, you can click the Refresh button to receive a new list of quotes.
                     Once a quote is chosen, you will be timed on how quickly you can type it. After completing, you can
@@ -130,16 +126,14 @@ const App = (): ReactElement => {
                     backgroundText={gameState.targetText}
                 />
             </div>
-            {snippetOptions.length > 0 && (
-                <div
-                    className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}
-                >
+            {availableQuotes.length > 0 && (
+                <div className={`${isWaitingOnUserToChooseQuote ? 'waiting-on-user-to-choose-quote' : ''} cardGroup`}>
                     <div className="groupHeader">
                         <h3>Choose a quote or</h3>
                         <Button key={'Refresh'} text={'Refresh'} callback={() => refetch()} />
                     </div>
-                    {snippetOptions.map((snippet) => (
-                        <Card key={snippet} text={snippet} callback={chooseSnippet} />
+                    {availableQuotes.map((quote: string) => (
+                        <Card key={quote} text={quote} callback={chooseQuote} />
                     ))}
                 </div>
             )}
