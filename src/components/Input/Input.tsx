@@ -11,21 +11,16 @@ interface Props {
     backgroundText: string;
 }
 
-export default function InputWrapper({ foregroundText, callback, inputRef, backgroundText }: Props) {
+export default function InputWrapper({
+    foregroundText,
+    callback,
+    inputRef,
+    backgroundText,
+}: Props): React.ReactElement {
     return (
         <div className="inputContainer">
-            <textarea
-                className="input"
-                ref={inputRef}
-                spellCheck={false}
-                value={foregroundText}
-                onChange={callback}
-            />
-            <textarea
-                className="inputBackdrop"
-                value={backgroundText}
-                readOnly
-            />
+            <textarea className="input" ref={inputRef} spellCheck={false} value={foregroundText} onChange={callback} />
+            <textarea className="inputBackdrop" value={backgroundText} readOnly />
         </div>
     );
-};
+}

@@ -1,4 +1,4 @@
-import inspirationalQuotes from "../data/inspirational-quotes";
+import inspirationalQuotes from '../data/inspirational-quotes';
 
 /**
  * Returns a randomized list of 6 inspirational quotes.
@@ -19,4 +19,4 @@ export default (): string[] => {
     }
 
     return randomInspirationalQuotes;
-}
+};

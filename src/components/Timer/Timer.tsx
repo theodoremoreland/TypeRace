@@ -1,55 +1,60 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 // Custom styles
 import './Timer.css';
 
-export default function Timer({timerIsOn, delta}) {
+interface Props {
+    timerIsOn: boolean;
+    delta?: unknown;
+}
+
+export default function Timer({ timerIsOn, delta }: Props): React.ReactElement {
     // delta = data that triggers useEffect upon change
     // said useEffect resets timer
-    const [time, setTime] = useState();
-    const [intervalID, setIntervalID] = useState();
+    const [time, setTime] = useState<number | undefined>(undefined);
+    const intervalIdRef = useRef<number>();
 
-    const startTimer = () => {
-        if (intervalID !== undefined) {
-            clearInterval(intervalID);
+    const startTimer = useCallback(() => {
+        const newIntervalID: number = setInterval(() => setTime((prevCount) => (prevCount ? prevCount + 1 : 1)), 1_000);
+
+        if (intervalIdRef.current) {
+            clearInterval(intervalIdRef.current);
         }
-        const newIntervalID = setInterval(() => setTime(prevCount => prevCount + 1), 1000);
-        setIntervalID(newIntervalID);
-    };
+
+        intervalIdRef.current = newIntervalID;
+    }, []);
 
     useEffect(() => {
-        if (delta && timerIsOn && time > 0) {
-            setTime(0);
-            startTimer();
-        }
-
-        // eslint-disable-next-line
-    }, [delta])
-
-    useEffect(() => {
-        if (timerIsOn === true) {
-            setTime(0);
-            startTimer();
-        }
-        else if (time > 0 && intervalID !== undefined) {
-            clearInterval(intervalID);
-            setIntervalID(undefined);
+        return () => {
+            clearInterval(intervalIdRef.current);
             setTime(undefined);
+
+            intervalIdRef.current = undefined;
+        };
+    }, []);
+
+    /**
+     * Executes when "delta" changes (e.g. when user select new snippet).
+     */
+    useEffect(() => {
+        if (delta) {
+            setTime(0);
+            startTimer();
         }
+    }, [delta, startTimer]);
 
-        // eslint-disable-next-line
-    }, [timerIsOn]);
+    /**
+     * Executes when timer changes from on to off.
+     */
+    useEffect(() => {
+        if (timerIsOn === false) {
+            clearInterval(intervalIdRef.current);
+            setTime(undefined);
 
-    return (
-        <>
-            {
-                !Number.isNaN(time)
-                    ?   <p className="timer">
-                            {time}
-                        </p>
-                    : ""
-            }
-        </>
-    );
-};
+            intervalIdRef.current = undefined;
+        }
+    }, [timerIsOn, startTimer]);
+
+    return <>{!Number.isNaN(time) ? <p className="timer">{time}</p> : ''}</>;
+}

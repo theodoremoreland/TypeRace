@@ -1,10 +1,9 @@
-
 // HTTP requests
-import { fetchRandomQuotes } from "./api_calls/fetchRandomQuotes";
+import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
 
 // Utils & Scripts
-import extractErrorMessage from "./utils/extractErrorMessage";
-import selectRandomInspirationalQuotes from "./scripts/selectRandomInspirationalQuotes";
+import extractErrorMessage from './utils/extractErrorMessage';
+import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
 
 export enum GameActionType {
     Start = 'start',
@@ -58,10 +57,10 @@ export const initialGameState: GameState = {
     timerIsOn: false,
     startTime: null,
     totalTime: null,
-}
+};
 
 export const gameReducer = (gameState: GameState, action: GameAction): GameState => {
-    const newGameState: GameState = {...gameState};
+    const newGameState: GameState = { ...gameState };
 
     switch (action.type) {
         case GameActionType.Start: {
@@ -100,16 +99,16 @@ export const gameReducer = (gameState: GameState, action: GameAction): GameState
             return initialGameState;
         }
         default: {
-            throw new Error("Invalid game action");
+            throw new Error('Invalid game action');
         }
     }
 
     return newGameState;
-}
+};
 
 export const updateDocumentTitle = (newTitle: string): void => {
     document.title = newTitle;
-} 
+};
 
 export const getRandomQuotes = async (): Promise<string[]> => {
     let randomQuotes: string[];
