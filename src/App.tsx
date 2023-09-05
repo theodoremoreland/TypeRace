@@ -63,8 +63,6 @@ const App = (): ReactElement => {
 
     useEffect(() => {
         setIsWaitingOnUserToChooseSnippet(true);
-
-        window.scrollTo(0, 4000);
     }, [snippetOptions]);
 
     useEffect(() => {
