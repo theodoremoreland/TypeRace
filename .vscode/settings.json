@@ -1,0 +1,7 @@
+{
+    "cSpell.words": [
+        "tanstack"
+    ],
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

@@ -34,21 +34,21 @@
     --accent-medium: 1rem accent;
     --accent-small: 0.8rem accent;
 
-    --content-width: 85%;
+    --content-width: 90%;
     --content-max-width: 2160px;
 
-    --primary-color: #E85A4F;
-    --secondary-color: #E98074;
-    --tertiary-color: #8E8D8A;
-    --quaternary-color: #D8C3A5;
-    --quinary-color: #EAE7DC;
+    --primary-color: #e85a4f;
+    --secondary-color: #e98074;
+    --tertiary-color: #8e8d8a;
+    --quaternary-color: #d8c3a5;
+    --quinary-color: #eae7dc;
 }
 
 /* ------------------- GLOBAL ------------------- */
 
 html,
 body,
-#root, 
+#root,
 .app {
     margin: 0;
     padding: 0;
@@ -107,6 +107,7 @@ body,
 }
 
 .panel {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -117,13 +118,34 @@ body,
     max-width: var(--content-max-width);
 }
 
+.panel .description {
+    display: none;
+}
+
+.panel .description.waiting-on-user-to-choose-snippet {
+    z-index: 3;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 50px;
+    font-family: body;
+    font-size: 1.2rem;
+    color: #eae7dc;
+}
+
 .inputContainer {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.input, .inputBackdrop {
+.input,
+.inputBackdrop {
     width: 100%;
     height: 100%;
     font: var(--body-xxl);
@@ -145,7 +167,7 @@ body,
 }
 
 .inputBackdrop {
-    color: #8E8D8A;
+    color: #8e8d8a;
     background-color: var(--quaternary-color);
     pointer-events: none;
 }
@@ -199,7 +221,10 @@ body,
     text-align: center;
     color: var(--quinary-color);
     background-color: #e9807480;
-    transition: transform 250ms, background-color 400ms, box-shadow 400ms;
+    transition:
+        transform 250ms,
+        background-color 400ms,
+        box-shadow 400ms;
 }
 
 .card:hover {
@@ -213,18 +238,18 @@ body,
 }
 
 .waiting-on-user-to-choose-snippet > .groupHeader {
-    color: #EAE7DC;
+    color: #eae7dc;
 }
 
 /* ------------------- KEYFRAMES ------------------- */
 
 @keyframes fadeIn {
     from {
-      opacity: 0;
+        opacity: 0;
     }
-  
+
     to {
-      opacity: 1;
+        opacity: 1;
     }
 }
 
