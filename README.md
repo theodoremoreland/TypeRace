@@ -1,5 +1,5 @@
 # Type Race
-Practice your typing speed while reading words of wisdom. Visit the website hosted on AWS here: [Link](master.d1wzvrnr7vhxf7.amplifyapp.com/)
+Practice your typing speed while reading words of wisdom. Visit the website hosted on AWS [here](https://master.d1wzvrnr7vhxf7.amplifyapp.com/)
 
 The application attempts to retrieve each quote dynamically via HTTP request(s). The application will use static data upon failure.
 
