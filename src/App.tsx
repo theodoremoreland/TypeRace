@@ -1,5 +1,5 @@
 // React
-import React, { useState, useEffect, useRef, ReactElement, useReducer } from 'react';
+import React, { useState, useEffect, useRef, ReactElement, useReducer, useCallback } from 'react';
 
 // Third party
 import { useQuery } from '@tanstack/react-query';
@@ -13,6 +13,7 @@ import selectRandomInspirationalQuotes from './scripts/selectRandomInspirational
 import Card from './components/Card/Card';
 import Input from './components/Input/Input';
 import Timer from './components/Timer/Timer';
+import Button from './components/Button/Button';
 
 // Controller
 import { GameActionType, gameReducer, initialGameState, updateDocumentTitle } from './App.controller';
@@ -33,7 +34,7 @@ const App = (): ReactElement => {
     const [snippetOptions, setSnippetOptions] = useState<string[]>([]);
     const [isWaitingOnUserToChooseSnippet, setIsWaitingOnUserToChooseSnippet] = useState<boolean>(false);
 
-    const { data, isError } = useQuery({
+    const { data, isError, refetch } = useQuery({
         queryKey: ['quotes'],
         queryFn: fetchRandomQuotes,
         onError: (err: unknown) => console.error(extractErrorMessage(err)),
@@ -43,11 +44,9 @@ const App = (): ReactElement => {
         enabled: true,
     });
 
-    console.log(gameState);
-
-    const chooseSnippet = (userSelectedSnippet: string) => {
+    const chooseSnippet = useCallback((userSelectedSnippet: string) => {
         gameDispatch({ type: GameActionType.Start, targetText: userSelectedSnippet.replace(/[’]/g, "'") });
-    };
+    }, []);
 
     useEffect(() => {
         if (data) {
@@ -127,7 +126,10 @@ const App = (): ReactElement => {
                 <div
                     className={`${isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''} cardGroup`}
                 >
-                    <h3 className="groupHeader">Choose a quote</h3>
+                    <div className="groupHeader">
+                        <h3>Choose a quote or</h3>
+                        <Button key={'Refresh'} text={'Refresh'} callback={() => refetch()} />
+                    </div>
                     {snippetOptions.map((snippet) => (
                         <Card key={snippet} text={snippet} callback={chooseSnippet} />
                     ))}
