@@ -21,7 +21,7 @@ The application attempts to retrieve each text snippet dynamically via REST API 
 
 ### Future improvements
 - Update screenshots
-- Fixed bug where timer does display upon deleting completed text
+- Fix bug where timer does not display upon deleting completed text
 - Write some unit tests
 
 # Screenshots
