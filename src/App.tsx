@@ -113,6 +113,16 @@ const App = (): ReactElement => {
                 </p>
             </header>
             <div className="panel">
+                <div
+                    className={`${
+                        isWaitingOnUserToChooseSnippet ? 'waiting-on-user-to-choose-snippet' : ''
+                    } description`}
+                >
+                    Practice your typing speed while reading words of wisdom by choosing a special quote below. If the
+                    quotes below do not interest you, you can click the Refresh button to receive a new list of quotes.
+                    Once a quote is chosen, you will be timed on how quickly you can type it. After completing, you can
+                    delete your text to retry the same quote or choose another quote to be timed on something new.
+                </div>
                 <Input
                     foregroundText={gameState.typedText}
                     callback={(e: React.ChangeEvent<HTMLTextAreaElement>) =>

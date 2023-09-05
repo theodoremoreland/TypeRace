@@ -1,241 +1,266 @@
 /* ___________________ FONTS ____________________________ */
 
 @font-face {
-  font-family: header;
-  src: url('./fonts/SourceCodePro/SourceCodePro-Bold.ttf');
+    font-family: header;
+    src: url('./fonts/SourceCodePro/SourceCodePro-Bold.ttf');
 }
 
 @font-face {
-  font-family: body;
-  src: url('./fonts/SourceCodePro/SourceCodePro-Regular.ttf');
+    font-family: body;
+    src: url('./fonts/SourceCodePro/SourceCodePro-Regular.ttf');
 }
 
 @font-face {
-  font-family: accent;
-  src: url('./fonts/SourceCodePro/SourceCodePro-Light.ttf');
+    font-family: accent;
+    src: url('./fonts/SourceCodePro/SourceCodePro-Light.ttf');
 }
 
 /* ------------------- VARIABLES ------------------- */
 
 :root {
-  --header-xxl: 4rem header;
-  --header-xl: 2.8rem header;
-  --header-large: 2.25rem header;
-  --header-medium: 1.85rem header;
-  --header-small: 1.5rem header;
-  --header-xs: 1.2rem header;
+    --header-xxl: 4rem header;
+    --header-xl: 2.8rem header;
+    --header-large: 2.25rem header;
+    --header-medium: 1.85rem header;
+    --header-small: 1.5rem header;
+    --header-xs: 1.2rem header;
 
-  --body-xxl: 1.8rem body;
-  --body-xl: 1.5rem body;
-  --body-large: 1.23rem body;
-  --body-medium: 1rem body;
-  --body-small: 0.9rem body;
+    --body-xxl: 1.8rem body;
+    --body-xl: 1.5rem body;
+    --body-large: 1.23rem body;
+    --body-medium: 1rem body;
+    --body-small: 0.9rem body;
 
-  --accent-medium: 1rem accent;
-  --accent-small: 0.8rem accent;
+    --accent-medium: 1rem accent;
+    --accent-small: 0.8rem accent;
 
-  --content-width: 90%;
-  --content-max-width: 2160px;
+    --content-width: 90%;
+    --content-max-width: 2160px;
 
-  --primary-color: #E85A4F;
-  --secondary-color: #E98074;
-  --tertiary-color: #8E8D8A;
-  --quaternary-color: #D8C3A5;
-  --quinary-color: #EAE7DC;
+    --primary-color: #e85a4f;
+    --secondary-color: #e98074;
+    --tertiary-color: #8e8d8a;
+    --quaternary-color: #d8c3a5;
+    --quinary-color: #eae7dc;
 }
 
 /* ------------------- GLOBAL ------------------- */
 
 html,
 body,
-#root, 
+#root,
 .app {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--secondary-color);
 }
 
 /* ------------------- APP ------------------- */
 
 .backdrop {
-  z-index: 3;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: #00000094;
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000094;
 }
 
 .header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .appTitle {
-  width: min-content;
-  font: var(--header-xl);
-  color: var(--quinary-color);
-  margin: 5px 0px;
-  padding: 0;
-  text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.096);
-  transform: skewY(-5deg);
-  animation: fadeIn 1.5s forwards linear;
+    width: min-content;
+    font: var(--header-xl);
+    color: var(--quinary-color);
+    margin: 5px 0px;
+    padding: 0;
+    text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.096);
+    transform: skewY(-5deg);
+    animation: fadeIn 1.5s forwards linear;
 }
 
 .gameStatus {
-  font: var(--header-medium);
-  color: #000000;
-  text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.116);
+    font: var(--header-medium);
+    color: #000000;
+    text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.116);
 }
 
 .snippet {
-  font: var(--header-medium);
-  color: var(--quaternary-color);
-  width: var(--content-width);
-  max-width: var(--content-max-width);
-  animation: fadeIn 1.5s forwards linear;
+    font: var(--header-medium);
+    color: var(--quaternary-color);
+    width: var(--content-width);
+    max-width: var(--content-max-width);
+    animation: fadeIn 1.5s forwards linear;
 }
 
 .panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  height: 250px;
-  width: var(--content-width);
-  max-width: var(--content-max-width);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    height: 250px;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
+}
+
+.panel .description {
+    display: none;
+}
+
+.panel .description.waiting-on-user-to-choose-snippet {
+    z-index: 3;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 50px;
+    font-family: body;
+    font-size: 1.2rem;
+    color: #eae7dc;
 }
 
 .inputContainer {
-  position: relative;
-  width: 100%;
-  height: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-.input, .inputBackdrop {
-  width: 100%;
-  height: 100%;
-  font: var(--body-xxl);
-  border-style: none;
-  animation: fadeIn 1.5s forwards linear;
-  resize: none;
+.input,
+.inputBackdrop {
+    width: 100%;
+    height: 100%;
+    font: var(--body-xxl);
+    border-style: none;
+    animation: fadeIn 1.5s forwards linear;
+    resize: none;
 }
 
 .input {
-  outline: none;
-  z-index: 2;
-  position: absolute;
-  color: var(--primary-color);
-  background-color: #00000000;
+    outline: none;
+    z-index: 2;
+    position: absolute;
+    color: var(--primary-color);
+    background-color: #00000000;
 }
 
 .input:focus {
-  outline: none;
+    outline: none;
 }
 
 .inputBackdrop {
-  color: #8E8D8A;
-  background-color: var(--quaternary-color);
-  pointer-events: none;
+    color: #8e8d8a;
+    background-color: var(--quaternary-color);
+    pointer-events: none;
 }
 
 .groupHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 10px;
-  font: var(--header-small);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 10px;
+    font: var(--header-small);
 }
 
 .buttonGroup {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  animation: fadeIn 1.5s forwards linear;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    animation: fadeIn 1.5s forwards linear;
 }
 
 .button {
-  margin: 10px;
-  padding: 18px;
-  font: var(--header-xs);
-  color: var(--quinary-color);
-  background-color: var(--secondary-color);
-  border-radius: 18px;
-  border-style: solid;
+    margin: 10px;
+    padding: 18px;
+    font: var(--header-xs);
+    color: var(--quinary-color);
+    background-color: var(--secondary-color);
+    border-radius: 18px;
+    border-style: solid;
 }
 
 .button:hover {
-  filter: brightness(1.1);
+    filter: brightness(1.1);
 }
 
 .cardGroup {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  width: var(--content-width);
-  max-width: var(--content-max-width);
-  animation: fadeIn 1.5s forwards linear;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
+    animation: fadeIn 1.5s forwards linear;
 }
 
 .card {
-  margin: 10px;
-  padding: 30px;
-  width: 100%;
-  font: var(--body-medium);
-  text-align: center;
-  color: var(--quinary-color);
-  background-color: #e9807480;
-  transition: transform 250ms, background-color 400ms, box-shadow 400ms;
+    margin: 10px;
+    padding: 30px;
+    width: 100%;
+    font: var(--body-medium);
+    text-align: center;
+    color: var(--quinary-color);
+    background-color: #e9807480;
+    transition:
+        transform 250ms,
+        background-color 400ms,
+        box-shadow 400ms;
 }
 
 .card:hover {
-  transform: translateY(-5%);
-  background-color: var(--secondary-color);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    transform: translateY(-5%);
+    background-color: var(--secondary-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 .waiting-on-user-to-choose-snippet {
-  z-index: 3;
+    z-index: 3;
 }
 
 .waiting-on-user-to-choose-snippet > .groupHeader {
-  color: #EAE7DC;
+    color: #eae7dc;
 }
 
 /* ------------------- KEYFRAMES ------------------- */
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+    from {
+        opacity: 0;
+    }
 
-  to {
-    opacity: 1;
-  }
+    to {
+        opacity: 1;
+    }
 }
 
 /* ------------------- MEDIA QUERIES ------------------- */
 
 @media screen and (min-width: 769px) {
-  .panel {
-      height: 400px;
-  }
+    .panel {
+        height: 400px;
+    }
 
-  .buttonGroup {
-      flex-direction: row;
-  }
+    .buttonGroup {
+        flex-direction: row;
+    }
 }
