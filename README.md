@@ -1,7 +1,7 @@
 # Type Race
 A web page that tracks how long it takes the user to type a selected text snippet. 
 
-The application attempts to retrieve each text snippet dynamically via REST API request(s). The application will use static data upon failure to retrieve data from corresponding GET request.
+The application attempts to retrieve each text snippet dynamically via REST API request(s). The application will use static data upon failure.
 
 ### Technologies Used
 * React.js
