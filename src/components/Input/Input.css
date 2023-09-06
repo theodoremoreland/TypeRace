@@ -8,7 +8,7 @@
 .inputBackdrop {
     width: 100%;
     height: 100%;
-    font: var(--body-xxl);
+    font: var(--body-small);
     border-style: none;
     animation: fadeIn 1.5s forwards linear;
     resize: none;
@@ -30,4 +30,13 @@
     color: #8e8d8a;
     background-color: var(--quaternary-color);
     pointer-events: none;
+}
+
+/* ------------------- MEDIA QUERIES ------------------- */
+
+@media screen and (min-width: 769px) {
+    .input,
+    .inputBackdrop {
+        font: var(--body-xxl);
+    }
 }

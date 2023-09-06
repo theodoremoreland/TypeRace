@@ -93,7 +93,7 @@ body,
 }
 
 .gameStatus {
-    font: var(--header-medium);
+    font: var(--header-small);
     color: #000000;
     text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.116);
 }
@@ -119,15 +119,15 @@ body,
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-    padding: 50px;
-    font-family: body;
-    font-size: 1.2rem;
+    padding: 20px 50px 50px 50px;
+    font: var(--body-small);
     color: #eae7dc;
+    overflow-y: auto;
 }
 
 .groupHeader {
@@ -180,8 +180,18 @@ body,
 /* ------------------- MEDIA QUERIES ------------------- */
 
 @media screen and (min-width: 769px) {
+    .appTitle {
+        font: 1.5rem header;
+    }
+
     .panel {
         height: 400px;
+    }
+
+    .panel .description.waiting-on-user-to-choose-quote {
+        justify-content: center;
+        font-size: 1.2rem;
+        padding: 50px;
     }
 
     .buttonGroup {
