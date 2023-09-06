@@ -6,7 +6,7 @@ import './Timer.css';
 
 interface Props {
     timerIsOn: boolean;
-    delta?: unknown;
+    delta: unknown;
 }
 
 export default function Timer({ timerIsOn, delta }: Props): React.ReactElement {
@@ -35,26 +35,23 @@ export default function Timer({ timerIsOn, delta }: Props): React.ReactElement {
     }, []);
 
     /**
-     * Executes when "delta" changes (e.g. when user select new snippet).
+     * Executes when timer should start or stop or if delta changes.
      */
     useEffect(() => {
-        if (delta) {
+        // If there is data for delta and timer was supposed to start...
+        if (delta && timerIsOn) {
             setTime(0);
             startTimer();
         }
-    }, [delta, startTimer]);
 
-    /**
-     * Executes when timer changes from on to off.
-     */
-    useEffect(() => {
+        // If timer is supposed to be turned off...
         if (timerIsOn === false) {
             clearInterval(intervalIdRef.current);
             setTime(undefined);
 
             intervalIdRef.current = undefined;
         }
-    }, [timerIsOn, startTimer]);
+    }, [delta, timerIsOn, startTimer]);
 
     return <>{!Number.isNaN(time) ? <p className="timer">{time}</p> : ''}</>;
 }
