@@ -112,10 +112,11 @@ const App = (): ReactElement => {
             </header>
             <div className="panel">
                 <div className={`${isWaitingOnUserToChooseQuote ? 'waiting-on-user-to-choose-quote' : ''} description`}>
-                    Practice your typing speed while reading words of wisdom by choosing a special quote below. If the
-                    quotes below do not interest you, you can click the Refresh button to receive a new list of quotes.
-                    Once a quote is chosen, you will be timed on how quickly you can type it. After completing, you can
-                    delete your text to retry the same quote or choose another quote to be timed on something new.
+                    Practice your typing speed while reading words of wisdom by choosing a quote below. If the quotes
+                    below do not interest you, you can click the Refresh button to receive a new list of quotes. Once a
+                    quote is selected, you will be timed on how quickly you can type your selection. After completing,
+                    you can delete your text to retry the same quote or choose another quote to be timed on a different
+                    quote.
                 </div>
                 <Input
                     foregroundText={gameState.typedText}
