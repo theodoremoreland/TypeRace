@@ -1,0 +1,14 @@
+.button {
+    margin: 10px;
+    padding: 18px;
+    font: var(--header-xs);
+    color: var(--quinary-color);
+    background-color: var(--secondary-color);
+    border-radius: 18px;
+    border-style: solid;
+    border-color: var(--quinary-color);
+}
+
+.button:hover {
+    filter: brightness(1.1);
+}

@@ -1,0 +1,21 @@
+.card {
+    margin: 10px;
+    padding: 30px;
+    width: var(--content-width);
+    max-width: var(--content-max-width);
+    font: var(--body-medium);
+    text-align: center;
+    color: var(--quinary-color);
+    background-color: #e9807480;
+    transition:
+        transform 250ms,
+        background-color 400ms,
+        box-shadow 400ms;
+    animation: fadeIn 1.5s forwards linear;
+}
+
+.card:hover {
+    transform: translateY(-5%);
+    background-color: var(--secondary-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}

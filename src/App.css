@@ -83,7 +83,7 @@ body,
 
 .appTitle {
     width: min-content;
-    font: var(--header-xl);
+    font: var(--header-large);
     color: var(--quinary-color);
     margin: 5px 0px;
     padding: 0;
@@ -96,14 +96,6 @@ body,
     font: var(--header-medium);
     color: #000000;
     text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.116);
-}
-
-.snippet {
-    font: var(--header-medium);
-    color: var(--quaternary-color);
-    width: var(--content-width);
-    max-width: var(--content-max-width);
-    animation: fadeIn 1.5s forwards linear;
 }
 
 .panel {
@@ -138,40 +130,6 @@ body,
     color: #eae7dc;
 }
 
-.inputContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.input,
-.inputBackdrop {
-    width: 100%;
-    height: 100%;
-    font: var(--body-xxl);
-    border-style: none;
-    animation: fadeIn 1.5s forwards linear;
-    resize: none;
-}
-
-.input {
-    outline: none;
-    z-index: 2;
-    position: absolute;
-    color: var(--primary-color);
-    background-color: #00000000;
-}
-
-.input:focus {
-    outline: none;
-}
-
-.inputBackdrop {
-    color: #8e8d8a;
-    background-color: var(--quaternary-color);
-    pointer-events: none;
-}
-
 .groupHeader {
     display: flex;
     justify-content: center;
@@ -188,20 +146,6 @@ body,
     animation: fadeIn 1.5s forwards linear;
 }
 
-.button {
-    margin: 10px;
-    padding: 18px;
-    font: var(--header-xs);
-    color: var(--quinary-color);
-    background-color: var(--secondary-color);
-    border-radius: 18px;
-    border-style: solid;
-}
-
-.button:hover {
-    filter: brightness(1.1);
-}
-
 .cardGroup {
     display: flex;
     flex-direction: column;
@@ -211,26 +155,6 @@ body,
     width: var(--content-width);
     max-width: var(--content-max-width);
     animation: fadeIn 1.5s forwards linear;
-}
-
-.card {
-    margin: 10px;
-    padding: 30px;
-    width: 100%;
-    font: var(--body-medium);
-    text-align: center;
-    color: var(--quinary-color);
-    background-color: #e9807480;
-    transition:
-        transform 250ms,
-        background-color 400ms,
-        box-shadow 400ms;
-}
-
-.card:hover {
-    transform: translateY(-5%);
-    background-color: var(--secondary-color);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 .waiting-on-user-to-choose-quote {
