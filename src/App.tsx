@@ -105,7 +105,7 @@ const App = (): ReactElement => {
                 <p className="gameStatus">
                     {gameState.isVictory &&
                         gameState.totalTime &&
-                        `Finished in ${new Intl.NumberFormat().format(gameState.totalTime)}ms @${Math.floor(
+                        `Finished in ${new Intl.NumberFormat().format(gameState.totalTime)}ms @ ${Math.floor(
                             gameState.targetText.split(' ').length / (gameState.totalTime / 1000 / 60),
                         )}WPM`}
                 </p>
