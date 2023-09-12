@@ -48,6 +48,16 @@ const App = (): ReactElement => {
         gameDispatch({ type: GameActionType.Start, targetText: selectedQuote.replace(/[’]/g, "'") });
     }, []);
 
+    /** Checks for delete after completing quote, will restart game if so. */
+    const onKeyUp = useCallback(
+        (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+            if (e.code === 'Backspace' && gameState.isVictory) {
+                gameDispatch({ type: GameActionType.Restart });
+            }
+        },
+        [gameState.isVictory],
+    );
+
     useEffect(() => {
         if (data) {
             gameDispatch({ type: GameActionType.Clear });
@@ -76,13 +86,9 @@ const App = (): ReactElement => {
     useEffect(() => {
         const hasUserCompletedText: boolean =
             gameState.typedText.replace(/\n/g, ' ') === gameState.targetText && gameState.targetText !== '';
-        const hasUserModifiedTextAfterCompletion: boolean =
-            gameState.isVictory === true && gameState.typedText !== gameState.targetText;
 
         if (hasUserCompletedText) {
             gameDispatch({ type: GameActionType.Finish });
-        } else if (hasUserModifiedTextAfterCompletion) {
-            gameDispatch({ type: GameActionType.Restart });
         }
     }, [gameState.typedText, gameState.targetText, gameState.isVictory]);
 
@@ -125,6 +131,7 @@ const App = (): ReactElement => {
                     }
                     inputRef={inputRef}
                     backgroundText={gameState.targetText}
+                    onKeyUp={onKeyUp}
                 />
             </div>
             {availableQuotes.length > 0 && (
