@@ -121,8 +121,8 @@ const App = (): ReactElement => {
                     Practice your typing speed while reading words of wisdom by choosing a quote below. If the quotes
                     below do not interest you, you can click the Refresh button to receive a new list of quotes. Once a
                     quote is selected, you will be timed on how quickly you can type your selection. After completing,
-                    you can delete your text to retry the same quote or choose another quote to be timed on a different
-                    quote.
+                    you can press the Backspace key on your keyboard to retry the same quote. Alternatively, you can
+                    choose a different quote to be timed on.
                 </div>
                 <Input
                     foregroundText={gameState.typedText}
