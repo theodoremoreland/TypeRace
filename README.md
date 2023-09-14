@@ -21,14 +21,3 @@ The application attempts to retrieve each quote dynamically via HTTP request(s).
 
 -   Source of quotes (deprecated): https://api.quotable.io/random
 -   Source of fallback quotes: https://type.fit/api/quotes
-
-### Future improvements
-
--   Update screenshots
--   Write some unit tests
-
-<img src="presentation/8.PNG" width="800">
-
-## After completing type race. Displays time in milliseconds and words per minute (Desktop)
-
-<img src="presentation/9.PNG" width="800">
