@@ -132,6 +132,7 @@ body,
 
 .groupHeader {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -192,6 +193,10 @@ body,
         justify-content: center;
         font-size: 1.2rem;
         padding: 50px;
+    }
+
+    .groupHeader {
+        flex-direction: row;
     }
 
     .buttonGroup {
