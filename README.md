@@ -12,6 +12,7 @@ The application attempts to retrieve each quote dynamically via HTTP request(s).
 -   CSS3
 -   Vite
 -   TanStack / React Query
+-   Zod
 -   ESLint
 -   Prettier
 -   VS Code
