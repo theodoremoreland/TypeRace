@@ -86,9 +86,14 @@ const App = (): ReactElement => {
     useEffect(() => {
         const hasUserCompletedText: boolean =
             gameState.typedText.replace(/\n/g, ' ') === gameState.targetText && gameState.targetText !== '';
+        const hasUserDeletedCharAfterCompletingText: boolean =
+            gameState.typedText.length < gameState.targetText.length && gameState.isVictory === true;
 
         if (hasUserCompletedText) {
             gameDispatch({ type: GameActionType.Finish });
+        } else if (hasUserDeletedCharAfterCompletingText) {
+            // This is a fallback for restarting game upon deleting a character after completing a quote if the user device does not have the Backspace key.
+            gameDispatch({ type: GameActionType.Restart });
         }
     }, [gameState.typedText, gameState.targetText, gameState.isVictory]);
 

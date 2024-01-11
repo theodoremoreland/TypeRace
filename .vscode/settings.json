@@ -1,7 +1,5 @@
 {
-    "cSpell.words": [
-        "tanstack"
-    ],
+    "cSpell.words": ["quoteable", "tanstack"],
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
