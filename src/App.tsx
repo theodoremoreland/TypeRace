@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 // Custom
 import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
 import extractErrorMessage from './utils/extractErrorMessage';
-import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
+import selectRandomInspirationalQuotes from './modules/selectRandomInspirationalQuotes';
 
 // Custom components
 import Card from './components/Card/Card';

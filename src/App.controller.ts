@@ -3,7 +3,7 @@ import { fetchRandomQuotes } from './api_calls/fetchRandomQuotes';
 
 // Utils & Scripts
 import extractErrorMessage from './utils/extractErrorMessage';
-import selectRandomInspirationalQuotes from './scripts/selectRandomInspirationalQuotes';
+import selectRandomInspirationalQuotes from './modules/selectRandomInspirationalQuotes';
 
 export enum GameActionType {
     Start = 'start',
