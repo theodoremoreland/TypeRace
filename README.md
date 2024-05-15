@@ -34,6 +34,8 @@ The application attempts to retrieve each quote dynamically via HTTP request(s).
 -   Source of quotes (deprecated): https://api.quotable.io/random
 -   Source of fallback quotes: https://type.fit/api/quotes
 
+# Screenshots
+
 ## Desktop
 
 ### Initial view (Desktop)
