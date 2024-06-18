@@ -2,7 +2,7 @@
 
 Practice your typing speed while reading words of wisdom.
 
-<img src="presentation/thumbnail.png" width="650">
+<img src="presentation/thumbnail.webp" width="650">
 
 [Visit the website hosted on AWS](https://master.d1wzvrnr7vhxf7.amplifyapp.com/)
 
