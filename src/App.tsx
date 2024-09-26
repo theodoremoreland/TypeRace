@@ -143,7 +143,14 @@ const App = (): ReactElement => {
                 <div className={`${isWaitingOnUserToChooseQuote ? 'waiting-on-user-to-choose-quote' : ''} cardGroup`}>
                     <div className="groupHeader">
                         <h3>Choose a quote or</h3>
-                        <Button key={'Refresh'} text={'Refresh'} callback={() => refetch()} />
+                        <Button
+                            key={'Refresh'}
+                            text={'Refresh'}
+                            callback={async () => {
+                                await refetch();
+                                gameDispatch({ type: GameActionType.Clear });
+                            }}
+                        />
                     </div>
                     {availableQuotes.map((quote: string) => (
                         <Card key={quote} text={quote} callback={chooseQuote} />
