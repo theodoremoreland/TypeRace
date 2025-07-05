@@ -4,7 +4,7 @@ Practice your typing speed while reading words of wisdom.
 
 <img src="presentation/thumbnail.webp" width="650">
 
-[View the application](https://master.d1wzvrnr7vhxf7.amplifyapp.com/)
+[View the application](https://type-race.theodoremoreland.dev)
 
 The application attempts to retrieve each quote dynamically via HTTP request(s). The application will use static data upon failure.
 
